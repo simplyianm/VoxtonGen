@@ -18,7 +18,7 @@ public class PlatUnfinishedBuilding extends PlatBuilding {
 	protected final static int FloorHeight = PlatMapContext.FloorHeight;
 	
 	protected final static byte airId = (byte) Material.AIR.getId();
-	protected final static byte girderId = (byte) Material.IRON_BLOCK.getId();
+	protected final static byte girderId = (byte) Material.DOUBLE_STEP.getId();
 	protected final static Material dirtMaterial = Material.DIRT;
 	protected final static Material fenceMaterial = Material.IRON_FENCE;
 	protected final static Material stairMaterial = Material.WOOD_STAIRS;

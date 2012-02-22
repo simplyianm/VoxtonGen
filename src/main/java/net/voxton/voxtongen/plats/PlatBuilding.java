@@ -30,7 +30,7 @@ public abstract class PlatBuilding extends PlatLot {
 	protected MaterialFactory windowsEW;
 	protected MaterialFactory windowsNS;
 	protected final static byte airId = (byte) Material.AIR.getId();
-	protected final static byte ironId = (byte) Material.IRON_BLOCK.getId();
+	protected final static byte doubleSlabId = (byte) Material.DOUBLE_STEP.getId();
 	protected final static byte antennaId = (byte) Material.FENCE.getId();
 	protected final static byte lightId = (byte) Material.GLOWSTONE.getId();
 	protected final static byte conditionerId = (byte) Material.ENDER_PORTAL_FRAME.getId();
@@ -423,7 +423,7 @@ public abstract class PlatBuilding extends PlatLot {
 	private void drawAntenna(ByteChunk chunk, int x, int y, int z) {
 		if (rand.nextBoolean()) {
 			int y2 = y + rand.nextInt(8) + 8;
-			chunk.setBlocks(x, y, y + 3, z, ironId);
+			chunk.setBlocks(x, y, y + 3, z, doubleSlabId);
 			chunk.setBlocks(x, y + 2, y2, z, antennaId);
 			if (y2 >= navLightY) {
 				navLightX = x;
