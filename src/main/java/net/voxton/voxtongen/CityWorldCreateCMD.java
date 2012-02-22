@@ -8,26 +8,25 @@ import org.bukkit.command.CommandSender;
 public class CityWorldCreateCMD implements CommandExecutor {
     private final CityWorld plugin;
 
-    public CityWorldCreateCMD(CityWorld plugin)
-    {
+    public CityWorldCreateCMD(CityWorld plugin) {
         this.plugin = plugin;
     }
 
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] split) 
-    {
-		if (sender instanceof Player) {
-			Player player = (Player) sender;
-			if (player.hasPermission("cityworld.command")) {
-				player.sendMessage("Loading/creating world... This might take a moment...");
-				player.teleport(plugin.getCityWorld().getSpawnLocation());
-				return true;
-			} else {
-				sender.sendMessage("You do not have permission to use this command");
-				return false;
-			}
-		} else {
-			sender.sendMessage("This command is only usable by a player");
-			return false;
-		}
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] split) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            if (player.hasPermission("cityworld.command")) {
+                player.sendMessage("Loading/creating world... This might take a moment...");
+                player.teleport(plugin.getCityWorld().getSpawnLocation());
+                return true;
+            } else {
+                sender.sendMessage("You do not have permission to use this command");
+                return false;
+            }
+        } else {
+            sender.sendMessage("This command is only usable by a player");
+            return false;
+        }
     }
+
 }

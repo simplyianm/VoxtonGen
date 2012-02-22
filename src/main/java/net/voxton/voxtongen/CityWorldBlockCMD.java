@@ -7,17 +7,16 @@ import org.bukkit.command.CommandSender;
 public class CityWorldBlockCMD implements CommandExecutor {
     private final CityWorld plugin;
 
-	public CityWorldBlockCMD(CityWorld plugin)
-    {
+    public CityWorldBlockCMD(CityWorld plugin) {
         this.plugin = plugin;
     }
 
-	public CityWorld getWorld() {
-		return plugin;
-	}
-	
-	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] split) {
+    public CityWorld getWorld() {
+        return plugin;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] split) {
 //		// validate the player
 //		if (!(sender instanceof Player)) {
 //			sender.sendMessage(String.format("%s is only usable by a player", label));
@@ -51,7 +50,8 @@ public class CityWorldBlockCMD implements CommandExecutor {
 //		
 //		
 //		player.sendMessage("DO: " + split[0]);
-		sender.sendMessage("Not working yet");
-		return true;
-	}
+        sender.sendMessage("Not working yet");
+        return true;
+    }
+
 }
