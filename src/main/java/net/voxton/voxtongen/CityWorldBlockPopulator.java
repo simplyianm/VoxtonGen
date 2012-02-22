@@ -2,8 +2,8 @@ package net.voxton.voxtongen;
 
 import java.util.Random;
 
-import net.voxton.voxtongen.PlatMaps.PlatMap;
-import net.voxton.voxtongen.Support.RealChunk;
+import net.voxton.voxtongen.platmaps.PlatMap;
+import net.voxton.voxtongen.support.RealChunk;
 
 import org.bukkit.Chunk;
 import org.bukkit.World;
