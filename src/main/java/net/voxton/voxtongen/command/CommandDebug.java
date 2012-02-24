@@ -1,5 +1,6 @@
-package net.voxton.voxtongen;
+package net.voxton.voxtongen.command;
 
+import net.voxton.voxtongen.VoxtonGen;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,9 +11,9 @@ import org.bukkit.command.CommandSender;
  *
  * @author HaxtorMoogle
  */
-public class CityWorldDebugCMD implements CommandExecutor {
+public class CommandDebug implements CommandExecutor {
 //    private final CityWorld plugin;
-    public CityWorldDebugCMD(CityWorld plugin) {
+    public CommandDebug(VoxtonGen plugin) {
 //        this.plugin = plugin;
     }
 

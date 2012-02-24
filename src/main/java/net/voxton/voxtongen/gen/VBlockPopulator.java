@@ -1,19 +1,20 @@
-package net.voxton.voxtongen;
+package net.voxton.voxtongen.gen;
 
 import java.util.Random;
+import net.voxton.voxtongen.VoxtonGen;
 
 import net.voxton.voxtongen.platmaps.PlatMap;
-import net.voxton.voxtongen.support.RealChunk;
+import net.voxton.voxtongen.chunk.RealChunk;
 
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
 
-public class CityWorldBlockPopulator extends BlockPopulator {
-    private CityWorldChunkGenerator chunkGen;
+public class VBlockPopulator extends BlockPopulator {
+    private VoxtonGen plugin;
 
-    public CityWorldBlockPopulator(CityWorldChunkGenerator chunkGen) {
-        this.chunkGen = chunkGen;
+    public VBlockPopulator(VoxtonGen instance) {
+        this.plugin = instance;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class CityWorldBlockPopulator extends BlockPopulator {
         RealChunk chunk = new RealChunk(source);
 
         // figure out what everything looks like
-        PlatMap platmap = chunkGen.getPlatMap(world, random, chunkX, chunkZ);
+        PlatMap platmap = plugin.getPlatMap(world, random, chunkX, chunkZ);
         if (platmap != null) {
             platmap.generateBlocks(chunk);
         }

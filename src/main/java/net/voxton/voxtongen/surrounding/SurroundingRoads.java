@@ -1,4 +1,4 @@
-package net.voxton.voxtongen.support;
+package net.voxton.voxtongen.surrounding;
 
 import java.util.Arrays;
 import net.voxton.voxtongen.platmaps.PlatMap;

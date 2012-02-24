@@ -2,10 +2,10 @@ package net.voxton.voxtongen.context;
 
 import java.util.Random;
 
-import net.voxton.voxtongen.CityWorld;
+import net.voxton.voxtongen.VoxtonGen;
 
 public class ContextLowrise extends PlatMapContext {
-    public ContextLowrise(CityWorld plugin, Random rand) {
+    public ContextLowrise(VoxtonGen plugin, Random rand) {
         super(plugin, rand);
 
         setFloorRange(rand, 3, 1);

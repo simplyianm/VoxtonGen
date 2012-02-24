@@ -1,111 +1,30 @@
-package net.voxton.voxtongen;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package net.voxton.voxtongen.platmaps;
 
-import java.util.*;
-
-import net.voxton.voxtongen.context.ContextAllPark;
-import net.voxton.voxtongen.context.ContextCityCenter;
-import net.voxton.voxtongen.context.ContextHighrise;
-import net.voxton.voxtongen.context.ContextLowrise;
-import net.voxton.voxtongen.context.ContextMall;
-import net.voxton.voxtongen.context.ContextMidrise;
-import net.voxton.voxtongen.context.ContextUnfinished;
-import net.voxton.voxtongen.context.PlatMapContext;
+import java.util.HashMap;
+import java.util.Random;
+import net.voxton.voxtongen.VoxtonGen;
+import net.voxton.voxtongen.VoxtonGen;
+import net.voxton.voxtongen.context.*;
 import net.voxton.voxtongen.platmaps.PlatMap;
 import net.voxton.voxtongen.platmaps.PlatMapVanilla;
 import net.voxton.voxtongen.platmaps.city.PlatMapCentralPark;
+import net.voxton.voxtongen.platmaps.city.PlatMapMegaScrapers;
 import net.voxton.voxtongen.platmaps.city.PlatMapSkyscrapers;
 import net.voxton.voxtongen.platmaps.city.PlatMapTown;
-import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.support.ByteChunk;
-
-import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.generator.BlockPopulator;
-import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
-public class CityWorldChunkGenerator extends ChunkGenerator {
-    private CityWorld plugin;
-
-    public String worldname;
-
-    public String worldstyle;
-
-    public CityWorldChunkGenerator(CityWorld instance, String name, String style) {
-        this.plugin = instance;
-        this.worldname = name;
-        this.worldstyle = style;
-    }
-
-    public CityWorld getWorld() {
-        return plugin;
-    }
-
-    public String getWorldname() {
-        return worldname;
-    }
-
-    public String getWorldstyle() {
-        return worldstyle;
-    }
-
-    @Override
-    public List<BlockPopulator> getDefaultPopulators(World world) {
-        return Arrays.asList((BlockPopulator) new CityWorldBlockPopulator(this));
-    }
-
-    @Override
-    public Location getFixedSpawnLocation(World world, Random random) {
-        // see if this works any better (loosely based on ExpansiveTerrain)
-        int x = random.nextInt(100) - 50;
-        int z = random.nextInt(100) - 50;
-        //int y = Math.max(world.getHighestBlockYAt(x, z), PlatMap.StreetLevel + 1);
-        int y = world.getHighestBlockYAt(x, z);
-        return new Location(world, x, y, z);
-    }
-
-    @Override
-    public byte[] generate(World world, Random random, int chunkX, int chunkZ) {
-
-        // place to work
-        ByteChunk byteChunk = new ByteChunk(chunkX, chunkZ);
-
-        // figure out what everything looks like
-        PlatMap platmap = getPlatMap(world, random, chunkX, chunkZ);
-        if (platmap != null) {
-            platmap.generateChunk(byteChunk);
-        }
-
-        return byteChunk.blocks;
-    }
-
-    // this function is designed for BlockPopulators...
-    //    calling it else where will likely result in nulls being returned
-    public PlatLot getPlatLot(World world, Random random, int chunkX, int chunkZ) {
-        PlatLot platlot = null;
-
-        // try and find the lot handler for this chunk
-        PlatMap platmap = getPlatMap(world, random, chunkX, chunkZ);
-        if (platmap != null) {
-
-            // calculate the right index
-            int platX = chunkX - platmap.X;
-            int platZ = chunkZ - platmap.Z;
-
-            // see if there is something there yet
-            platlot = platmap.platLots[platX][platZ];
-        }
-
-        // return what we got
-        return platlot;
-    }
-
-    // ***********
-    // manager for handling the city plat maps collection
-    private double xFactor = 25.0;
-
-    private double zFactor = 25.0;
-
+/**
+ *
+ * @author simplyianm
+ */
+public class PlatMapManager {
+    private VoxtonGen plugin;
+    
     private SimplexNoiseGenerator generatorUrban;
 
     private SimplexNoiseGenerator generatorWater;
@@ -113,6 +32,10 @@ public class CityWorldChunkGenerator extends ChunkGenerator {
     private SimplexNoiseGenerator generatorUnfinished;
 
     private HashMap<Long, PlatMap> platmaps;
+
+    public PlatMapManager(VoxtonGen plugin) {
+        this.plugin = plugin;
+    }
 
     public PlatMap getPlatMap(World world, Random random, int chunkX, int chunkZ) {
 
@@ -133,7 +56,7 @@ public class CityWorldChunkGenerator extends ChunkGenerator {
 
         // doesn't exist? then make it!
         if (platmap == null) {
-            platmap = getMap(world, random, chunkX, chunkZ, platX, platZ);
+            platmap = makePlatMap(world, random, chunkX, chunkZ, platX, platZ);
             platmaps.put(platkey, platmap);
         }
 
@@ -141,7 +64,7 @@ public class CityWorldChunkGenerator extends ChunkGenerator {
         return platmap;
     }
 
-    private PlatMap getMap(World world, Random random, int chunkX, int chunkZ, int platX, int platZ) {
+    private PlatMap makePlatMap(World world, Random random, int chunkX, int chunkZ, int platX, int platZ) {
         PlatMap platmap = null;
 
         // generator generated?
@@ -171,6 +94,9 @@ public class CityWorldChunkGenerator extends ChunkGenerator {
             case DESERT:			// industrial zone
             case EXTREME_HILLS:		// tall city
             case FOREST:			// neighborhood
+                platmap = new PlatMapMegaScrapers(world, random, context, platX, platZ);
+                break;
+
             case FROZEN_OCEAN:		// winter ocean/lake side
             case FROZEN_RIVER:		// ???
             case ICE_DESERT:		// stark industrial zone
@@ -202,7 +128,7 @@ public class CityWorldChunkGenerator extends ChunkGenerator {
         return platmap;
     }
 
-    private PlatMapContext getContext(World world, CityWorld plugin, Random random, int chunkX, int chunkZ) {
+    private PlatMapContext getContext(World world, VoxtonGen plugin, Random random, int chunkX, int chunkZ) {
         switch (random.nextInt(20)) {
             case 0:
             case 1:

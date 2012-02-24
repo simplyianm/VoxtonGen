@@ -1,4 +1,4 @@
-package net.voxton.voxtongen.support;
+package net.voxton.voxtongen.surrounding;
 
 public class SurroundingFloors {
     //TODO refactor this to SurroundingLevels and SurroundingHeights & SurroundingDepths

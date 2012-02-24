@@ -1,9 +1,10 @@
 package net.voxton.voxtongen.context;
 
 import java.util.Random;
+import net.voxton.voxtongen.GenerationSettings;
 
-import net.voxton.voxtongen.CityWorld;
-import net.voxton.voxtongen.support.RealChunk;
+import net.voxton.voxtongen.VoxtonGen;
+import net.voxton.voxtongen.chunk.RealChunk;
 
 public class PlatMapContext {
     public static int oddsNeverGoingToHappen = Integer.MAX_VALUE;
@@ -120,26 +121,27 @@ public class PlatMapContext {
 
     public boolean doSpawnerInSewer;
 
-    public PlatMapContext(CityWorld plugin, Random rand) {
-        isolationId = (byte) plugin.getIsolationMaterial().getId();
-        doPlumbing = plugin.isDoPlumbing();
-        doSewer = plugin.isDoSewer();
-        doCistern = plugin.isDoCistern();
-        doBasement = plugin.isDoBasement();
-        doUnderworld = plugin.isDoUnderworld();
-        doTreasureInSewer = plugin.isDoTreasureInSewer();
-        doTreasureInPlumbing = plugin.isDoTreasureInPlumbing();
-        doTreasureInFountain = plugin.isDoTreasureInFountain();
-        doSpawnerInSewer = plugin.isDoSpawnerInSewer();
+    public PlatMapContext(VoxtonGen plugin, Random rand) {
+        GenerationSettings settings = plugin.getSettings();
+        isolationId = (byte) settings.getIsolationMaterial().getId();
+        doPlumbing = settings.isDoPlumbing();
+        doSewer = settings.isDoSewer();
+        doCistern = settings.isDoCistern();
+        doBasement = settings.isDoBasement();
+        doUnderworld = settings.isDoUnderworld();
+        doTreasureInSewer = settings.isDoTreasureInSewer();
+        doTreasureInPlumbing = settings.isDoTreasureInPlumbing();
+        doTreasureInFountain = settings.isDoTreasureInFountain();
+        doSpawnerInSewer = settings.isDoSpawnerInSewer();
 
         // where is the ground
-        streetLevel = Math.min(Math.max(plugin.getStreetLevel(),
+        streetLevel = Math.min(Math.max(settings.getStreetLevel(),
                 floorHeight * FudgeFloorsBelow),
                 RealChunk.Height - floorHeight * (FudgeFloorsAbove + absoluteMinimumFloorsAbove));
 
         // worst case?
         absoluteMaximumFloorsBelow = Math.max(Math.min(streetLevel / floorHeight - FudgeFloorsBelow, absoluteAbsoluteMaximumFloorsBelow), 0);
-        absoluteMaximumFloorsAbove = Math.max(Math.min((RealChunk.Height - streetLevel) / floorHeight - FudgeFloorsAbove, plugin.getMaximumFloors()), absoluteMinimumFloorsAbove);
+        absoluteMaximumFloorsAbove = Math.max(Math.min((RealChunk.Height - streetLevel) / floorHeight - FudgeFloorsAbove, settings.getMaximumFloors()), absoluteMinimumFloorsAbove);
 
         // turn off a few things if there isn't room
         if (absoluteMaximumFloorsBelow == 0) {

@@ -1,5 +1,6 @@
 package net.voxton.voxtongen.platmaps.city;
 
+import net.voxton.voxtongen.plats.park.PlatStatue;
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;

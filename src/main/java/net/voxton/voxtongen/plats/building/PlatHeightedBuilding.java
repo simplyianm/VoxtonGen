@@ -5,10 +5,10 @@ import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmaps.PlatMap;
 import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.support.ByteChunk;
+import net.voxton.voxtongen.chunk.ByteChunk;
 import net.voxton.voxtongen.support.Direction.StairWell;
-import net.voxton.voxtongen.support.RealChunk;
-import net.voxton.voxtongen.support.SurroundingFloors;
+import net.voxton.voxtongen.chunk.RealChunk;
+import net.voxton.voxtongen.surrounding.SurroundingFloors;
 
 import org.bukkit.Material;
 

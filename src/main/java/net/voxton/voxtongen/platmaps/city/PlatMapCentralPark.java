@@ -8,7 +8,7 @@ import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmaps.PlatMapRoadBorder;
 import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.plats.PlatPark;
+import net.voxton.voxtongen.plats.park.PlatPark;
 import org.bukkit.World;
 
 /**
@@ -21,8 +21,8 @@ public class PlatMapCentralPark extends PlatMapRoadBorder {
     public PlatMapCentralPark(World world, Random random, PlatMapContext context, int platX, int platZ) {
         super(world, random, context, platX, platZ);
 
-        for (int x = HALF_BORDER; x < INT_SIDE; x++) {
-            for (int z = HALF_BORDER; z < INT_SIDE; z++) {
+        for (int x = HALF_BORDER; x < SIDE - HALF_BORDER; x++) {
+            for (int z = HALF_BORDER; z < SIDE - HALF_BORDER; z++) {
                 PlatLot last = lastPlat;
                 lastPlat = new PlatPark(platRand, context);
                 if (last != null) {

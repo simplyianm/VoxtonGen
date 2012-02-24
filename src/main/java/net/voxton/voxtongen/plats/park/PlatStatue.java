@@ -1,14 +1,15 @@
-package net.voxton.voxtongen.plats;
+package net.voxton.voxtongen.plats.park;
 
 import net.voxton.voxtongen.plats.building.PlatBuilding;
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmaps.PlatMap;
-import net.voxton.voxtongen.support.ByteChunk;
+import net.voxton.voxtongen.chunk.ByteChunk;
 import net.voxton.voxtongen.support.Direction.Ladder;
 import net.voxton.voxtongen.support.Direction.TrapDoor;
-import net.voxton.voxtongen.support.RealChunk;
+import net.voxton.voxtongen.chunk.RealChunk;
+import net.voxton.voxtongen.plats.PlatLot;
 
 import org.bukkit.Material;
 import org.bukkit.TreeType;

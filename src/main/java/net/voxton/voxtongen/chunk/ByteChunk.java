@@ -1,6 +1,7 @@
-package net.voxton.voxtongen.support;
+package net.voxton.voxtongen.chunk;
 
 import java.util.Arrays;
+import net.voxton.voxtongen.support.MaterialFactory;
 
 import org.bukkit.Material;
 

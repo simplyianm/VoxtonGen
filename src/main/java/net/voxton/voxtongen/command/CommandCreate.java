@@ -1,14 +1,15 @@
-package net.voxton.voxtongen;
+package net.voxton.voxtongen.command;
 
+import net.voxton.voxtongen.VoxtonGen;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class CityWorldCreateCMD implements CommandExecutor {
-    private final CityWorld plugin;
+public class CommandCreate implements CommandExecutor {
+    private final VoxtonGen plugin;
 
-    public CityWorldCreateCMD(CityWorld plugin) {
+    public CommandCreate(VoxtonGen plugin) {
         this.plugin = plugin;
     }
 

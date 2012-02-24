@@ -1,8 +1,8 @@
 name: VoxtonGen
-version: 0.60
-authors: [DaddyChurchill, AlbireoX]
+version: 0.1
+author: AlbireoX
 
-main: net.voxton.voxtongen.CityWorld
+main: net.voxton.voxtongen.VoxtonGen
 load: startup
 
 commands:

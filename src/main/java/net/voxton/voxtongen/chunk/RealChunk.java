@@ -1,5 +1,6 @@
-package net.voxton.voxtongen.support;
+package net.voxton.voxtongen.chunk;
 
+import net.voxton.voxtongen.support.Direction;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;

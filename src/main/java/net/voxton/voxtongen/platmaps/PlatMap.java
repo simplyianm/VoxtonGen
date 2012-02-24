@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.support.ByteChunk;
-import net.voxton.voxtongen.support.RealChunk;
+import net.voxton.voxtongen.chunk.ByteChunk;
+import net.voxton.voxtongen.chunk.RealChunk;
 
 import org.bukkit.World;
 
