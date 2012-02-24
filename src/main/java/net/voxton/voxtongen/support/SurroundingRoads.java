@@ -1,8 +1,9 @@
 package net.voxton.voxtongen.support;
 
+import java.util.Arrays;
 import net.voxton.voxtongen.platmaps.PlatMap;
 import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.plats.PlatRoad;
+import net.voxton.voxtongen.plats.road.RoadOrientation;
 
 public class SurroundingRoads {
     private boolean[][] roads;
@@ -31,12 +32,7 @@ public class SurroundingRoads {
 
                 // beyond the edge
                 if (neighbor == null) {
-                    roads[x][z] = platX == PlatRoad.PlatMapRoadInset - 1
-                            || platZ == PlatRoad.PlatMapRoadInset - 1
-                            || platX == PlatMap.Width - PlatRoad.PlatMapRoadInset
-                            || platZ == PlatMap.Width - PlatRoad.PlatMapRoadInset;
-
-                    // is connected in some way?
+                    roads[x][z] = true; //All roads on edges are... edges.
                 } else {
                     roads[x][z] = platlot.isConnected(neighbor);
                 }
@@ -44,45 +40,131 @@ public class SurroundingRoads {
         }
     }
 
-    // adjacent roads?
+    /**
+     * Returns true if the road section is straight.
+     * 
+     * @return 
+     */
+    public boolean isStraight() {
+        boolean ns = (toWest() && toEast());
+        boolean we = (toNorth() && toSouth());
+        
+        return (ns && !we) || (!ns && we);
+    }
+    
+    /**
+     * Returns true if there are roads adjacent to this one.
+     *
+     * @return
+     */
     public boolean adjacentRoads() {
         return toEast() || toWest() || toNorth() || toSouth();
     }
 
+    /**
+     * Returns true if there is a road in the center.
+     *
+     * @return
+     */
     public boolean toCenter() {
-        return true;
+        return roads[1][1];
     }
 
+    /**
+     * Returns true if there is a road to the north.
+     *
+     * @return
+     */
     public boolean toNorth() {
         return roads[1][0];
     }
 
+    /**
+     * Returns true if there is a road to the south.
+     *
+     * @return
+     */
     public boolean toSouth() {
         return roads[1][2];
     }
 
+    /**
+     * Returns true if there is a road to the west.
+     *
+     * @return
+     */
     public boolean toWest() {
         return roads[0][1];
     }
 
+    /**
+     * Returns true if there is a road to the east.
+     *
+     * @return
+     */
     public boolean toEast() {
         return roads[2][1];
     }
 
+    /**
+     * Returns true if there is a road to the northwest.
+     *
+     * @return
+     */
     public boolean toNorthWest() {
-        return true;
+        return roads[0][0];
     }
 
+    /**
+     * Returns true if there is a road to the northeast.
+     *
+     * @return
+     */
     public boolean toNorthEast() {
-        return true;
+        return roads[2][0];
     }
 
+    /**
+     * Returns true if there is a road to the southwest.
+     *
+     * @return
+     */
     public boolean toSouthWest() {
-        return true;
+        return roads[0][2];
     }
 
+    /**
+     * Returns true if there is a road to the southeast.
+     *
+     * @return
+     */
     public boolean toSouthEast() {
-        return true;
+        return roads[2][2];
+    }
+
+    /**
+     * Gets the orientation of the road piece.
+     *
+     * @return
+     */
+    public RoadOrientation getOrientation() {
+        if (toWest() && toEast()) {
+            if (toNorth() && !toSouth()) {
+                return RoadOrientation.SOUTH;
+            } else if (!toNorth() && toSouth()) {
+                return RoadOrientation.NORTH;
+            }
+        }
+
+        if (toNorth() && toSouth()) {
+            if (toWest() && !toEast()) {
+                return RoadOrientation.EAST;
+            } else if (!toWest() && toEast()) {
+                return RoadOrientation.WEST;
+            }
+        }
+
+        return RoadOrientation.CENTER;
     }
 
 }

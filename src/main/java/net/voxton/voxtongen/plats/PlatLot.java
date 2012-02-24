@@ -63,7 +63,7 @@ public abstract class PlatLot {
                 int atZ = platZ + z - 1;
 
                 // is it in bounds?
-                if (!(atX < 0 || atX > PlatMap.Width - 1 || atZ < 0 || atZ > PlatMap.Width - 1)) {
+                if (!(atX < 0 || atX > PlatMap.SIDE - 1 || atZ < 0 || atZ > PlatMap.SIDE - 1)) {
                     PlatLot relative = platmap.platLots[atX][atZ];
 
                     if (!onlyConnectedNeighbors || isConnected(relative)) {
@@ -85,8 +85,8 @@ public abstract class PlatLot {
         if (context.doUnderworld) {
 
             // the pillars of the world
-            for (int x = 0; x < ByteChunk.Width; x++) {
-                for (int z = 0; z < ByteChunk.Width; z++) {
+            for (int x = 0; x < ByteChunk.WIDTH; x++) {
+                for (int z = 0; z < ByteChunk.WIDTH; z++) {
                     int x4 = x % 4;
                     int z4 = z % 4;
                     if ((x4 == 0 || x4 == 3) && (z4 == 0 || z4 == 3)) {

@@ -5,9 +5,9 @@ import java.util.Arrays;
 import org.bukkit.Material;
 
 public class ByteChunk {
-    public final static int Width = 16;
+    public final static int WIDTH = 16;
 
-    public final static int Height = 128;
+    public final static int HEIGHT = 128;
 
     public int X;
 
@@ -19,26 +19,26 @@ public class ByteChunk {
         super();
         X = chunkX;
         Z = chunkZ;
-        blocks = new byte[Width * Width * Height];
+        blocks = new byte[WIDTH * WIDTH * HEIGHT];
     }
 
     public void setBlock(int x, int y, int z, byte materialId) {
-        blocks[(x * Width + z) * Height + y] = materialId;
+        blocks[(x * WIDTH + z) * HEIGHT + y] = materialId;
     }
 
     public byte getBlock(int x, int y, int z) {
-        return blocks[(x * Width + z) * Height + y];
+        return blocks[(x * WIDTH + z) * HEIGHT + y];
     }
 
     public void setBlocks(int x, int y1, int y2, int z, byte materialId) {
-        int xz = (x * Width + z) * Height;
+        int xz = (x * WIDTH + z) * HEIGHT;
         Arrays.fill(blocks, xz + y1, xz + y2, materialId);
     }
 
     public void setBlocks(int x1, int x2, int y1, int y2, int z1, int z2, byte materialId) {
         for (int x = x1; x < x2; x++) {
             for (int z = z1; z < z2; z++) {
-                int xz = (x * Width + z) * Height;
+                int xz = (x * WIDTH + z) * HEIGHT;
                 Arrays.fill(blocks, xz + y1, xz + y2, materialId);
             }
         }
@@ -47,24 +47,24 @@ public class ByteChunk {
     public void setBlocks(int x1, int x2, int y1, int y2, int z1, int z2, byte primaryId, byte secondaryId, MaterialFactory maker) {
         for (int x = x1; x < x2; x++) {
             for (int z = z1; z < z2; z++) {
-                int xz = (x * Width + z) * Height;
+                int xz = (x * WIDTH + z) * HEIGHT;
                 Arrays.fill(blocks, xz + y1, xz + y2, maker.pickMaterial(primaryId, secondaryId, x, z));
             }
         }
     }
 
     public int setLayer(int blocky, byte materialId) {
-        setBlocks(0, Width, blocky, blocky + 1, 0, Width, materialId);
+        setBlocks(0, WIDTH, blocky, blocky + 1, 0, WIDTH, materialId);
         return blocky + 1;
     }
 
     public int setLayer(int blocky, int height, byte materialId) {
-        setBlocks(0, Width, blocky, blocky + height, 0, Width, materialId);
+        setBlocks(0, WIDTH, blocky, blocky + height, 0, WIDTH, materialId);
         return blocky + height;
     }
 
     public int setLayer(int blocky, int height, int inset, byte materialId) {
-        setBlocks(inset, Width - inset, blocky, blocky + height, inset, Width - inset, materialId);
+        setBlocks(inset, WIDTH - inset, blocky, blocky + height, inset, WIDTH - inset, materialId);
         return blocky + height;
     }
 
@@ -131,7 +131,7 @@ public class ByteChunk {
         // Ref: Notes/BCircle.PDF
         int cx = inset;
         int cz = inset;
-        int r = Width - inset * 2 - 1;
+        int r = WIDTH - inset * 2 - 1;
         int x = r;
         int z = 0;
         int xChange = 1 - 2 * r;
@@ -161,8 +161,8 @@ public class ByteChunk {
     public void setArcSouthWest(int inset, int y1, int y2, byte materialId, boolean fill) {
         // Ref: Notes/BCircle.PDF
         int cx = inset;
-        int cz = Width - inset;
-        int r = Width - inset * 2 - 1;
+        int cz = WIDTH - inset;
+        int r = WIDTH - inset * 2 - 1;
         int x = r;
         int z = 0;
         int xChange = 1 - 2 * r;
@@ -191,9 +191,9 @@ public class ByteChunk {
 
     public void setArcNorthEast(int inset, int y1, int y2, byte materialId, boolean fill) {
         // Ref: Notes/BCircle.PDF
-        int cx = Width - inset;
+        int cx = WIDTH - inset;
         int cz = inset;
-        int r = Width - inset * 2 - 1;
+        int r = WIDTH - inset * 2 - 1;
         int x = r;
         int z = 0;
         int xChange = 1 - 2 * r;
@@ -222,9 +222,9 @@ public class ByteChunk {
 
     public void setArcSouthEast(int inset, int y1, int y2, byte materialId, boolean fill) {
         // Ref: Notes/BCircle.PDF
-        int cx = Width - inset;
-        int cz = Width - inset;
-        int r = Width - inset * 2 - 1;
+        int cx = WIDTH - inset;
+        int cz = WIDTH - inset;
+        int r = WIDTH - inset * 2 - 1;
         int x = r;
         int z = 0;
         int xChange = 1 - 2 * r;

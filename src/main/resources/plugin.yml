@@ -1,8 +1,10 @@
-name: CityWorld
-main: me.daddychurchill.CityWorld.CityWorld
+name: VoxtonGen
 version: 0.60
+authors: [DaddyChurchill, AlbireoX]
+
+main: net.voxton.voxtongen.CityWorld
 load: startup
-author: DaddyChurchill
+
 commands:
   cityworld:
     description: Sends you to the CityWorld

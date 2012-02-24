@@ -12,8 +12,8 @@ public class PlatMapVanilla extends PlatMap {
     public PlatMapVanilla(World world, Random random, PlatMapContext context, int platX, int platZ) {
         super(world, random, context, platX, platZ);
 
-        for (int x = 0; x < Width; x++) {
-            for (int z = 0; z < Width; z++) {
+        for (int x = 0; x < SIDE; x++) {
+            for (int z = 0; z < SIDE; z++) {
                 PlatLot current = platLots[x][z];
                 if (current == null) {
                     platLots[x][z] = new PlatBiome(random, context);

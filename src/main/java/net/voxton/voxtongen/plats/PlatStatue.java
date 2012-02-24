@@ -1,5 +1,6 @@
 package net.voxton.voxtongen.plats;
 
+import net.voxton.voxtongen.plats.building.PlatBuilding;
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;

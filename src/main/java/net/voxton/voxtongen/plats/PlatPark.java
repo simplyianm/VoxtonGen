@@ -17,7 +17,7 @@ import org.bukkit.World;
 public class PlatPark extends PlatLot {
     protected static long connectedkeyForParks = 0;
 
-    protected final static int cisternDepth = PlatMapContext.FloorHeight * 4;
+    protected final static int cisternDepth = PlatMapContext.floorHeight * 4;
 
     protected final static int groundDepth = 2;
 
@@ -58,7 +58,7 @@ public class PlatPark extends PlatLot {
 
         // pick a style
         circleSidewalk = rand.nextBoolean();
-        waterDepth = rand.nextInt(PlatMapContext.FloorHeight * 2) + 1;
+        waterDepth = rand.nextInt(PlatMapContext.floorHeight * 2) + 1;
     }
 
     @Override
@@ -97,7 +97,7 @@ public class PlatPark extends PlatLot {
 
             // fill with water
             lowestY++;
-            chunk.setBlocks(0, ByteChunk.Width, lowestY, lowestY + waterDepth, 0, ByteChunk.Width, waterId);
+            chunk.setBlocks(0, ByteChunk.WIDTH, lowestY, lowestY + waterDepth, 0, ByteChunk.WIDTH, waterId);
 
             // outer columns and walls as needed
             if (neighbors.toNorth()) {

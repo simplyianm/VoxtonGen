@@ -1,9 +1,10 @@
-package net.voxton.voxtongen.plats;
+package net.voxton.voxtongen.plats.building;
 
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmaps.PlatMap;
+import net.voxton.voxtongen.plats.PlatLot;
 import net.voxton.voxtongen.support.ByteChunk;
 import net.voxton.voxtongen.support.Direction.StairWell;
 import net.voxton.voxtongen.support.RealChunk;
@@ -11,8 +12,8 @@ import net.voxton.voxtongen.support.SurroundingFloors;
 
 import org.bukkit.Material;
 
-public class PlatOfficeBuilding extends PlatBuilding {
-    protected final static int FloorHeight = PlatMapContext.FloorHeight;
+public class PlatHeightedBuilding extends PlatBuilding {
+    protected final static int FloorHeight = PlatMapContext.floorHeight;
 
     protected Material wallMaterial;
 
@@ -43,9 +44,21 @@ public class PlatOfficeBuilding extends PlatBuilding {
 
     protected int insetInsetHighAt;
 
-    public PlatOfficeBuilding(Random rand, PlatMapContext context) {
+    public PlatHeightedBuilding(Random rand, PlatMapContext context, int minHeight, int maxHeight) {
         super(rand, context);
-
+        
+        if (maxHeight > context.absoluteMaximumFloorsAbove) {
+            maxHeight = context.absoluteMaximumFloorsAbove;
+        }
+        
+        if (minHeight < 1) {
+            minHeight = 1;
+        }
+        
+        int heightDiff = maxHeight - minHeight;
+        
+        height = rand.nextInt(heightDiff) + minHeight;
+        
         // how do the walls inset?
         insetWallEW = rand.nextInt(context.rangeOfWallInset) + 1; // 1 or 2
         insetWallNS = rand.nextInt(context.rangeOfWallInset) + 1;
@@ -106,8 +119,8 @@ public class PlatOfficeBuilding extends PlatBuilding {
         super.makeConnected(rand, relative);
 
         // other bits
-        if (relative instanceof PlatOfficeBuilding) {
-            PlatOfficeBuilding relativebuilding = (PlatOfficeBuilding) relative;
+        if (relative instanceof PlatHeightedBuilding) {
+            PlatHeightedBuilding relativebuilding = (PlatHeightedBuilding) relative;
 
             // nudge in a bit
             insetWallEW = relativebuilding.insetWallEW;
@@ -143,7 +156,7 @@ public class PlatOfficeBuilding extends PlatBuilding {
 
         // bottom most floor
         drawCeilings(chunk, context, lowestY, 1, 0, 0, false, ceilingMaterial, neighborBasements);
-        chunk.setBlocks(0, ByteChunk.Width, lowestY, lowestY + 1, 0, ByteChunk.Width, (byte) ceilingMaterial.getId());
+        chunk.setBlocks(0, ByteChunk.WIDTH, lowestY, lowestY + 1, 0, ByteChunk.WIDTH, (byte) ceilingMaterial.getId());
 
         // below ground
         for (int floor = 0; floor < depth; floor++) {

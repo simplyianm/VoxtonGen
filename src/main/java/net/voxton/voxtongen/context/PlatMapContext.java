@@ -84,7 +84,7 @@ public class PlatMapContext {
 
     public int oddsOfNaturalArt = oddsExtremelyLikely; // sometimes nature is art 1/n of the time 
 
-    public static final int FloorHeight = 4;
+    public static final int floorHeight = 4;
 
     public static final int FudgeFloorsBelow = 2;
 
@@ -134,12 +134,12 @@ public class PlatMapContext {
 
         // where is the ground
         streetLevel = Math.min(Math.max(plugin.getStreetLevel(),
-                FloorHeight * FudgeFloorsBelow),
-                RealChunk.Height - FloorHeight * (FudgeFloorsAbove + absoluteMinimumFloorsAbove));
+                floorHeight * FudgeFloorsBelow),
+                RealChunk.Height - floorHeight * (FudgeFloorsAbove + absoluteMinimumFloorsAbove));
 
         // worst case?
-        absoluteMaximumFloorsBelow = Math.max(Math.min(streetLevel / FloorHeight - FudgeFloorsBelow, absoluteAbsoluteMaximumFloorsBelow), 0);
-        absoluteMaximumFloorsAbove = Math.max(Math.min((RealChunk.Height - streetLevel) / FloorHeight - FudgeFloorsAbove, plugin.getMaximumFloors()), absoluteMinimumFloorsAbove);
+        absoluteMaximumFloorsBelow = Math.max(Math.min(streetLevel / floorHeight - FudgeFloorsBelow, absoluteAbsoluteMaximumFloorsBelow), 0);
+        absoluteMaximumFloorsAbove = Math.max(Math.min((RealChunk.Height - streetLevel) / floorHeight - FudgeFloorsAbove, plugin.getMaximumFloors()), absoluteMinimumFloorsAbove);
 
         // turn off a few things if there isn't room
         if (absoluteMaximumFloorsBelow == 0) {
