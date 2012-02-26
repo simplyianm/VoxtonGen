@@ -109,4 +109,10 @@ public abstract class PlatMap {
         }
     }
 
+    /**
+     * Gets the type of map this map is.
+     * 
+     * @return 
+     */
+    public abstract MapType getType();
 }

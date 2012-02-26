@@ -3,8 +3,9 @@ package net.voxton.voxtongen.platmap.etc;
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;
+import net.voxton.voxtongen.platmap.MapType;
 import net.voxton.voxtongen.platmap.PlatMap;
-import net.voxton.voxtongen.plats.PlatBiome;
+import net.voxton.voxtongen.plats.etc.PlatBiome;
 import net.voxton.voxtongen.plats.PlatLot;
 
 import org.bukkit.World;
@@ -21,6 +22,11 @@ public class PlatMapVanilla extends PlatMap {
                 }
             }
         }
+    }
+
+    @Override
+    public MapType getType() {
+        return MapType.VANILLA;
     }
 
 }

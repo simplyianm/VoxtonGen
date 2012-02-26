@@ -10,6 +10,7 @@ import net.voxton.voxtongen.support.Direction.Ladder;
 import net.voxton.voxtongen.support.Direction.TrapDoor;
 import net.voxton.voxtongen.chunk.RealChunk;
 import net.voxton.voxtongen.chunk.ByteChunk;
+import net.voxton.voxtongen.plats.PlatType;
 import net.voxton.voxtongen.surrounding.SurroundingRoads;
 import org.bukkit.Material;
 import org.bukkit.entity.CreatureType;
@@ -598,6 +599,11 @@ public class PlatRoadPaved extends PlatRoad {
             default:
                 return Material.WATER;
         }
+    }
+
+    @Override
+    public PlatType getType() {
+        return PlatType.ROAD_PAVED;
     }
 
 }

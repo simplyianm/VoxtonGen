@@ -10,6 +10,7 @@ import net.voxton.voxtongen.support.Direction.Ladder;
 import net.voxton.voxtongen.support.Direction.TrapDoor;
 import net.voxton.voxtongen.chunk.RealChunk;
 import net.voxton.voxtongen.plats.PlatLot;
+import net.voxton.voxtongen.plats.PlatType;
 
 import org.bukkit.Material;
 import org.bukkit.TreeType;
@@ -225,6 +226,11 @@ public class PlatStatue extends PlatLot {
             default:
                 return StatueBase.PEDESTAL;
         }
+    }
+
+    @Override
+    public PlatType getType() {
+        return PlatType.STATUE;
     }
 
 }

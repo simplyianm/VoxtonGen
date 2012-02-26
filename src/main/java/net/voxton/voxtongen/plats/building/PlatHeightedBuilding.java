@@ -12,7 +12,7 @@ import net.voxton.voxtongen.surrounding.SurroundingFloors;
 
 import org.bukkit.Material;
 
-public class PlatHeightedBuilding extends PlatBuilding {
+public abstract class PlatHeightedBuilding extends PlatBuilding {
     protected final static int FloorHeight = PlatMapContext.floorHeight;
 
     protected Material wallMaterial;

@@ -28,6 +28,13 @@ public abstract class PlatLot {
         connectedkey = rand.nextLong();
     }
 
+    /**
+     * Gets the type of plat this plat is.
+     *
+     * @return
+     */
+    public abstract PlatType getType();
+
     public abstract void generateChunk(PlatMap platmap, ByteChunk chunk, PlatMapContext context, int platX, int platZ);
 
     public void generateBlocks(PlatMap platmap, RealChunk chunk, PlatMapContext context, int platX, int platZ) {

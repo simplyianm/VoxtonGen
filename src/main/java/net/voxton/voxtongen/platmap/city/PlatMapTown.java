@@ -6,6 +6,7 @@ package net.voxton.voxtongen.platmap.city;
 
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
+import net.voxton.voxtongen.platmap.MapType;
 import net.voxton.voxtongen.plats.PlatLot;
 import net.voxton.voxtongen.plats.building.PlatLowCommercial;
 import net.voxton.voxtongen.plats.building.PlatMedCommercial;
@@ -24,6 +25,11 @@ public class PlatMapTown extends PlatMapBlocks {
     protected PlatLot makeBlockPlat(int bx, int bz, int x, int z) {
         int rand = platRand.nextInt(3);
         return (rand != 0) ? new PlatMedCommercial(platRand, context) : new PlatLowCommercial(platRand, context);
+    }
+
+    @Override
+    public MapType getType() {
+        return MapType.TOWN;
     }
 
 }

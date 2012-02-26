@@ -7,6 +7,7 @@ package net.voxton.voxtongen.plats.road;
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.chunk.ByteChunk;
+import net.voxton.voxtongen.plats.PlatType;
 import net.voxton.voxtongen.surrounding.SurroundingRoads;
 import org.bukkit.Material;
 
@@ -47,6 +48,11 @@ public class PlatRoadArtery extends PlatRoadPaved {
                 chunk.setBlocks(1, 2, sl, slp, 0, ByteChunk.WIDTH, medianId);
                 break;
         }
+    }
+
+    @Override
+    public PlatType getType() {
+        return PlatType.ROAD_ARTERY;
     }
 
 }

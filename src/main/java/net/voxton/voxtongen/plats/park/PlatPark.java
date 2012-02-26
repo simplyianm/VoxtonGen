@@ -10,6 +10,7 @@ import net.voxton.voxtongen.support.Direction.TrapDoor;
 import net.voxton.voxtongen.surrounding.SurroundingParks;
 import net.voxton.voxtongen.chunk.RealChunk;
 import net.voxton.voxtongen.plats.PlatLot;
+import net.voxton.voxtongen.plats.PlatType;
 
 import org.bukkit.Material;
 import org.bukkit.TreeType;
@@ -228,6 +229,11 @@ public class PlatPark extends PlatLot {
             world.generateTree(chunk.getBlockLocation(3, surfaceY, 12), tree);
             world.generateTree(chunk.getBlockLocation(12, surfaceY, 12), tree);
         }
+    }
+
+    @Override
+    public PlatType getType() {
+        return PlatType.PARK;
     }
 
 }

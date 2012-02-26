@@ -6,15 +6,20 @@ package net.voxton.voxtongen.plats.building;
 
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
+import net.voxton.voxtongen.plats.PlatType;
 
 /**
  *
  * @author simplyianm
  */
 public class PlatSkyscraper extends PlatHeightedBuilding {
-
     public PlatSkyscraper(Random rand, PlatMapContext context) {
         super(rand, context, 20, 30);
     }
-    
+
+    @Override
+    public PlatType getType() {
+        return PlatType.SKYSCRAPER;
+    }
+
 }

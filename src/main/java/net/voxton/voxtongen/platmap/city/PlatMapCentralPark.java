@@ -6,6 +6,7 @@ package net.voxton.voxtongen.platmap.city;
 
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
+import net.voxton.voxtongen.platmap.MapType;
 import net.voxton.voxtongen.platmap.generic.PlatMapRoadBorder;
 import net.voxton.voxtongen.plats.PlatLot;
 import net.voxton.voxtongen.plats.park.PlatPark;
@@ -34,6 +35,11 @@ public class PlatMapCentralPark extends PlatMapRoadBorder {
         }
 
         lastPlat = null;
+    }
+
+    @Override
+    public MapType getType() {
+        return MapType.CENTRAL_PARK;
     }
 
 }

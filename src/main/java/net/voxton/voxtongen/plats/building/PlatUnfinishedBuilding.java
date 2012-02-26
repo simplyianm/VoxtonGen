@@ -12,6 +12,7 @@ import net.voxton.voxtongen.chunk.ByteChunk;
 import net.voxton.voxtongen.support.Direction.Stair;
 import net.voxton.voxtongen.support.Direction.Torch;
 import net.voxton.voxtongen.chunk.RealChunk;
+import net.voxton.voxtongen.plats.PlatType;
 import net.voxton.voxtongen.surrounding.SurroundingFloors;
 import net.voxton.voxtongen.support.Direction.StairWell;
 
@@ -252,6 +253,11 @@ public class PlatUnfinishedBuilding extends PlatBuilding {
         if (rand.nextBoolean() && !neighbors.toSouth()) {
             chunk.setBlocks(i, y1, y2, ByteChunk.WIDTH - 1, airId);
         }
+    }
+
+    @Override
+    public PlatType getType() {
+        return PlatType.UNFINISHED_BUILDING;
     }
 
 }
