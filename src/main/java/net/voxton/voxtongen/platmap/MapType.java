@@ -13,5 +13,6 @@ public enum MapType {
     MEGASCRAPERS,
     SKYSCRAPERS,
     TOWN,
-    VANILLA;
+    VANILLA, 
+    ONE_FLOOR;
 }
