@@ -72,7 +72,6 @@ public class MapMatrix {
     private int getMapMatrixRelative(int mapCoord) {
         return (mapCoord >= 0)
                 ? mapCoord % side
-                : (mapCoord % side) + side - 1;
-
+                : ((mapCoord + 1) % side) + side - 1;
     }
 }
