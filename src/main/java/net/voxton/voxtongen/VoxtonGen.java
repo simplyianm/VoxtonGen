@@ -1,11 +1,12 @@
 package net.voxton.voxtongen;
 
-import net.voxton.voxtongen.platmaps.PlatMapManager;
+import net.voxton.voxtongen.platmap.PlatMapManager;
 import java.util.Random;
 import net.voxton.voxtongen.gen.VChunkGenerator;
 import net.voxton.voxtongen.command.CommandCreate;
-import net.voxton.voxtongen.platmaps.PlatMap;
+import net.voxton.voxtongen.platmap.PlatMap;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.generator.ChunkGenerator;
@@ -110,8 +111,12 @@ public class VoxtonGen extends JavaPlugin {
      * @param chunkZ
      * @return
      */
-    public PlatMap getPlatMap(World world, Random random, int chunkX, int chunkZ) {
-        return platMapManager.getPlatMap(world, random, chunkX, chunkZ);
+    public PlatMap getPlatMap(Chunk chunk, Random random) {
+        return platMapManager.getPlatMap(chunk, random);
+    }
+
+    public PlatMap getPlatMap(World world, int cx, int cz, Random random) {
+        return platMapManager.getPlatMap(world, cx, cz, random);
     }
 
     @Override

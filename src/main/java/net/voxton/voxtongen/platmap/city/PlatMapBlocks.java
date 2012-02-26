@@ -1,10 +1,10 @@
-package net.voxton.voxtongen.platmaps.city;
+package net.voxton.voxtongen.platmap.city;
 
 import net.voxton.voxtongen.plats.park.PlatStatue;
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;
-import net.voxton.voxtongen.platmaps.PlatMapRoadBorder;
+import net.voxton.voxtongen.platmap.generic.PlatMapRoadBorder;
 import net.voxton.voxtongen.plats.*;
 import net.voxton.voxtongen.plats.road.PlatRoadPaved;
 import net.voxton.voxtongen.plats.road.PlatRoad;
@@ -15,8 +15,8 @@ import org.bukkit.World;
  * Represents an urban plat map, aka a plat map with a road grid.
  */
 public abstract class PlatMapBlocks extends PlatMapRoadBorder {
-    public PlatMapBlocks(World world, Random random, PlatMapContext context, int platX, int platZ) {
-        super(world, random, context, platX, platZ);
+    public PlatMapBlocks(World world, PlatMapContext context, int platX, int platZ) {
+        super(world, context, platX, platZ);
 
         //TODO rivers and railroads?
         //Nah

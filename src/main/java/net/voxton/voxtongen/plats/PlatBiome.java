@@ -3,7 +3,7 @@ package net.voxton.voxtongen.plats;
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;
-import net.voxton.voxtongen.platmaps.PlatMap;
+import net.voxton.voxtongen.platmap.PlatMap;
 import net.voxton.voxtongen.chunk.ByteChunk;
 
 import org.bukkit.Material;
@@ -12,8 +12,8 @@ import org.bukkit.block.Biome;
 public class PlatBiome extends PlatLot {
     protected final static byte stoneId = (byte) Material.STONE.getId();
 
-    public PlatBiome(Random rand, PlatMapContext context) {
-        super(rand, context);
+    public PlatBiome(PlatMapContext context) {
+        super(context.getRandom(), context);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class PlatBiome extends PlatLot {
 
         byteChunk.setLayer(0, context.streetLevel + 1, stoneId);
 
-        Biome biome = platmap.theWorld.getBiome(byteChunk.X, byteChunk.Z);
+        Biome biome = platmap.theWorld.getBiome(byteChunk.x, byteChunk.z);
         int tens = biome.ordinal() / 10;
         int ones = biome.ordinal() % 10;
         byteChunk.drawCoordinate(tens, ones, context.streetLevel + 1, (platX == 0 && platZ == 0));

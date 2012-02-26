@@ -1,7 +1,7 @@
 package net.voxton.voxtongen.surrounding;
 
 import java.util.Arrays;
-import net.voxton.voxtongen.platmaps.PlatMap;
+import net.voxton.voxtongen.platmap.PlatMap;
 import net.voxton.voxtongen.plats.PlatLot;
 import net.voxton.voxtongen.plats.road.RoadOrientation;
 

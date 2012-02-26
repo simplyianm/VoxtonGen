@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.voxton.voxtongen.platmaps.city;
+package net.voxton.voxtongen.platmap.city;
 
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
@@ -15,8 +15,8 @@ import org.bukkit.World;
  * @author simplyianm
  */
 public class PlatMapSkyscrapers extends PlatMapBlocks {
-    public PlatMapSkyscrapers(World world, Random random, PlatMapContext context, int platX, int platZ) {
-        super(world, random, context, platX, platZ);
+    public PlatMapSkyscrapers(World world, PlatMapContext context, int platX, int platZ) {
+        super(world, context, platX, platZ);
     }
 
     @Override

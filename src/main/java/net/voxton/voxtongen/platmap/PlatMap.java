@@ -1,4 +1,4 @@
-package net.voxton.voxtongen.platmaps;
+package net.voxton.voxtongen.platmap;
 
 import java.util.Random;
 import java.util.logging.Logger;
@@ -58,9 +58,9 @@ public abstract class PlatMap {
     // Instance data
     public World theWorld;
 
-    public int X;
+    public int x;
 
-    public int Z;
+    public int z;
 
     public Random platRand;
 
@@ -68,16 +68,16 @@ public abstract class PlatMap {
 
     public PlatLot[][] platLots;
 
-    public PlatMap(World world, Random random, PlatMapContext context, int platX, int platZ) {
+    public PlatMap(World world, PlatMapContext context, int platX, int platZ) {
         super();
         // log.info(String.format("PM: %d x %d create", platX, platZ));
 
         // populate the instance data
         this.theWorld = world;
         this.context = context;
-        this.X = platX;
-        this.Z = platZ;
-        this.platRand = new Random(world.getSeed() + (long) X * (long) SIDE + (long) Z);
+        this.x = platX;
+        this.z = platZ;
+        this.platRand = new Random(world.getSeed() + (long) x * (long) SIDE + (long) z);
 
         // make room for plat data
         platLots = new PlatLot[SIDE][SIDE];
@@ -86,8 +86,8 @@ public abstract class PlatMap {
     public void generateChunk(ByteChunk chunk) {
 
         // depending on the platchunk's type render a layer
-        int platX = chunk.X - X;
-        int platZ = chunk.Z - Z;
+        int platX = chunk.x - x;
+        int platZ = chunk.z - z;
         PlatLot platlot = platLots[platX][platZ];
         if (platlot != null) {
 
@@ -99,8 +99,8 @@ public abstract class PlatMap {
     public void generateBlocks(RealChunk chunk) {
 
         // depending on the platchunk's type render a layer
-        int platX = chunk.X - X;
-        int platZ = chunk.Z - Z;
+        int platX = chunk.X - x;
+        int platZ = chunk.Z - z;
         PlatLot platlot = platLots[platX][platZ];
         if (platlot != null) {
 

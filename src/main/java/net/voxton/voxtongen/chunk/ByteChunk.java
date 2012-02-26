@@ -10,16 +10,16 @@ public class ByteChunk {
 
     public final static int HEIGHT = 128;
 
-    public int X;
+    public int x;
 
-    public int Z;
+    public int z;
 
     public byte[] blocks;
 
     public ByteChunk(int chunkX, int chunkZ) {
         super();
-        X = chunkX;
-        Z = chunkZ;
+        x = chunkX;
+        z = chunkZ;
         blocks = new byte[WIDTH * WIDTH * HEIGHT];
     }
 

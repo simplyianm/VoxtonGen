@@ -11,12 +11,12 @@ import net.voxton.voxtongen.context.ContextMall;
 import net.voxton.voxtongen.context.ContextMidrise;
 import net.voxton.voxtongen.context.ContextUnfinished;
 import net.voxton.voxtongen.context.PlatMapContext;
-import net.voxton.voxtongen.platmaps.PlatMap;
-import net.voxton.voxtongen.platmaps.PlatMapVanilla;
-import net.voxton.voxtongen.platmaps.city.PlatMapCentralPark;
-import net.voxton.voxtongen.platmaps.city.PlatMapMegaScrapers;
-import net.voxton.voxtongen.platmaps.city.PlatMapSkyscrapers;
-import net.voxton.voxtongen.platmaps.city.PlatMapTown;
+import net.voxton.voxtongen.platmap.PlatMap;
+import net.voxton.voxtongen.platmap.etc.PlatMapVanilla;
+import net.voxton.voxtongen.platmap.city.PlatMapCentralPark;
+import net.voxton.voxtongen.platmap.city.PlatMapMegaScrapers;
+import net.voxton.voxtongen.platmap.city.PlatMapSkyscrapers;
+import net.voxton.voxtongen.platmap.city.PlatMapTown;
 import net.voxton.voxtongen.plats.PlatLot;
 import net.voxton.voxtongen.chunk.ByteChunk;
 import org.bukkit.Bukkit;
@@ -71,7 +71,7 @@ public class VChunkGenerator extends ChunkGenerator {
         ByteChunk byteChunk = new ByteChunk(chunkX, chunkZ);
 
         // figure out what everything looks like
-        PlatMap platmap = plugin.getPlatMap(world, random, chunkX, chunkZ);
+        PlatMap platmap = plugin.getPlatMap(world, chunkX, chunkZ, random);
         if (platmap != null) {
             platmap.generateChunk(byteChunk);
         }
@@ -85,12 +85,12 @@ public class VChunkGenerator extends ChunkGenerator {
         PlatLot platlot = null;
 
         // try and find the lot handler for this chunk
-        PlatMap platmap = plugin.getPlatMap(world, random, chunkX, chunkZ);
+        PlatMap platmap = plugin.getPlatMap(world, chunkX, chunkZ, random);
         if (platmap != null) {
 
             // calculate the right index
-            int platX = chunkX - platmap.X;
-            int platZ = chunkZ - platmap.Z;
+            int platX = chunkX - platmap.x;
+            int platZ = chunkZ - platmap.z;
 
             // see if there is something there yet
             platlot = platmap.platLots[platX][platZ];

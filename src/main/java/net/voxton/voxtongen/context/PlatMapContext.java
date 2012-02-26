@@ -121,7 +121,11 @@ public class PlatMapContext {
 
     public boolean doSpawnerInSewer;
 
+    private final Random random;
+
     public PlatMapContext(VoxtonGen plugin, Random rand) {
+        this.random = rand;
+
         GenerationSettings settings = plugin.getSettings();
         isolationId = (byte) settings.getIsolationMaterial().getId();
         doPlumbing = settings.isDoPlumbing();
@@ -153,6 +157,15 @@ public class PlatMapContext {
 
         // default floor range
         setFloorRange(rand, 2, 2);
+    }
+
+    /**
+     * Random objects
+     * 
+     * @return 
+     */
+    public Random getRandom() {
+        return random;
     }
 
     protected void setFloorRange(Random rand, int aboveRange, int belowRange) {

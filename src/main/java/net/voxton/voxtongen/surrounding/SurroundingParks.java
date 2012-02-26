@@ -1,6 +1,6 @@
 package net.voxton.voxtongen.surrounding;
 
-import net.voxton.voxtongen.platmaps.PlatMap;
+import net.voxton.voxtongen.platmap.PlatMap;
 import net.voxton.voxtongen.plats.PlatLot;
 
 public class SurroundingParks {

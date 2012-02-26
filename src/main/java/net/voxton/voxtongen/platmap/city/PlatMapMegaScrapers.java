@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.voxton.voxtongen.platmaps.city;
+package net.voxton.voxtongen.platmap.city;
 
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
@@ -16,11 +16,13 @@ import org.bukkit.World;
  */
 public class PlatMapMegaScrapers extends PlatMapBlocks {
     private PlatLot last;
+
     private int lbx = 0;
+
     private int lbz = 0;
-    
-    public PlatMapMegaScrapers(World world, Random random, PlatMapContext context, int platX, int platZ) {
-        super(world, random, context, platX, platZ);
+
+    public PlatMapMegaScrapers(World world, PlatMapContext context, int platX, int platZ) {
+        super(world, context, platX, platZ);
         last = null;
     }
 
@@ -32,11 +34,11 @@ public class PlatMapMegaScrapers extends PlatMapBlocks {
             last = next;
             return next;
         }
-        
+
         last = new PlatSkyscraper(platRand, context);
         lbx = bx;
         lbz = bz;
         return last;
     }
-    
+
 }

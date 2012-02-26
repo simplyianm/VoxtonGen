@@ -6,7 +6,7 @@ import java.util.Random;
 import org.bukkit.Material;
 
 import net.voxton.voxtongen.context.PlatMapContext;
-import net.voxton.voxtongen.platmaps.PlatMap;
+import net.voxton.voxtongen.platmap.PlatMap;
 import net.voxton.voxtongen.plats.PlatLot;
 import net.voxton.voxtongen.chunk.ByteChunk;
 import net.voxton.voxtongen.support.Direction.Stair;

@@ -3,7 +3,7 @@ package net.voxton.voxtongen.gen;
 import java.util.Random;
 import net.voxton.voxtongen.VoxtonGen;
 
-import net.voxton.voxtongen.platmaps.PlatMap;
+import net.voxton.voxtongen.platmap.PlatMap;
 import net.voxton.voxtongen.chunk.RealChunk;
 
 import org.bukkit.Chunk;
@@ -19,14 +19,11 @@ public class VBlockPopulator extends BlockPopulator {
 
     @Override
     public void populate(World world, Random random, Chunk source) {
-        int chunkX = source.getX();
-        int chunkZ = source.getZ();
-
-        // place to work
+        //Workable chunk
         RealChunk chunk = new RealChunk(source);
 
-        // figure out what everything looks like
-        PlatMap platmap = plugin.getPlatMap(world, random, chunkX, chunkZ);
+        //Get the platmap
+        PlatMap platmap = plugin.getPlatMap(source, random);
         if (platmap != null) {
             platmap.generateBlocks(chunk);
         }

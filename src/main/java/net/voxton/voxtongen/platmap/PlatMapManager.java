@@ -2,19 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.voxton.voxtongen.platmaps;
+package net.voxton.voxtongen.platmap;
 
 import java.util.HashMap;
 import java.util.Random;
 import net.voxton.voxtongen.VoxtonGen;
-import net.voxton.voxtongen.VoxtonGen;
 import net.voxton.voxtongen.context.*;
-import net.voxton.voxtongen.platmaps.PlatMap;
-import net.voxton.voxtongen.platmaps.PlatMapVanilla;
-import net.voxton.voxtongen.platmaps.city.PlatMapCentralPark;
-import net.voxton.voxtongen.platmaps.city.PlatMapMegaScrapers;
-import net.voxton.voxtongen.platmaps.city.PlatMapSkyscrapers;
-import net.voxton.voxtongen.platmaps.city.PlatMapTown;
+import net.voxton.voxtongen.platmap.etc.PlatMapVanilla;
+import net.voxton.voxtongen.platmap.city.PlatMapCentralPark;
+import net.voxton.voxtongen.platmap.city.PlatMapMegaScrapers;
+import net.voxton.voxtongen.platmap.city.PlatMapSkyscrapers;
+import net.voxton.voxtongen.platmap.city.PlatMapTown;
+import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
@@ -24,7 +23,7 @@ import org.bukkit.util.noise.SimplexNoiseGenerator;
  */
 public class PlatMapManager {
     private VoxtonGen plugin;
-    
+
     private SimplexNoiseGenerator generatorUrban;
 
     private SimplexNoiseGenerator generatorWater;
@@ -37,16 +36,35 @@ public class PlatMapManager {
         this.plugin = plugin;
     }
 
-    public PlatMap getPlatMap(World world, Random random, int chunkX, int chunkZ) {
+    /**
+     * Gets the PlatMap associated with the given chunk.
+     *
+     * @param chunk
+     * @param random
+     * @return
+     */
+    public PlatMap getPlatMap(Chunk chunk, Random random) {
+        return getPlatMap(chunk.getWorld(), chunk.getX(), chunk.getZ(), random);
+    }
 
-        // get the plat map collection
+    /**
+     * Gets the PlatMap associated with the given coordinates.
+     *
+     * @param world
+     * @param cx
+     * @param cz
+     * @param random
+     * @return
+     */
+    public PlatMap getPlatMap(World world, int cx, int cz, Random random) {
+        //Verify the platmap hashmap has been created
         if (platmaps == null) {
             platmaps = new HashMap<Long, PlatMap>();
         }
 
         // find the origin for the plat
-        int platX = calcOrigin(chunkX);
-        int platZ = calcOrigin(chunkZ);
+        int platX = getPlatMapOrigin(cx);
+        int platZ = getPlatMapOrigin(cz);
 
         // calculate the plat's key
         Long platkey = Long.valueOf(((long) platX * (long) Integer.MAX_VALUE + (long) platZ));
@@ -56,7 +74,7 @@ public class PlatMapManager {
 
         // doesn't exist? then make it!
         if (platmap == null) {
-            platmap = makePlatMap(world, random, chunkX, chunkZ, platX, platZ);
+            platmap = findPlatMapFromBiome(world, random, platX, platZ);
             platmaps.put(platkey, platmap);
         }
 
@@ -64,7 +82,12 @@ public class PlatMapManager {
         return platmap;
     }
 
-    private PlatMap makePlatMap(World world, Random random, int chunkX, int chunkZ, int platX, int platZ) {
+    private PlatMap findPlatMapFromMatrix(World world, Random random, int chunkX, int chunkZ, int platX, int platZ) {
+        PlatMap platmap = null;
+        return platmap;
+    }
+
+    private PlatMap findPlatMapFromBiome(World world, Random random, int platX, int platZ) {
         PlatMap platmap = null;
 
         // generator generated?
@@ -75,11 +98,8 @@ public class PlatMapManager {
             generatorUnfinished = new SimplexNoiseGenerator(seed + 2);
         }
 
-//			int platX
-//			CityWorld.log.info("PlatMapAt: " + platX / PlatMap.Width + ", " + platZ / PlatMap.Width + " OR " + chunkX + ", " + chunkZ);
-
         // what is the context for this one?
-        PlatMapContext context = getContext(world, plugin, random, chunkX, chunkZ);
+        PlatMapContext context = getContext(random);
 
         // figure out the biome for this platmap
         switch (world.getBiome(platX, platZ)) {
@@ -88,20 +108,20 @@ public class PlatMapManager {
              */
             case HELL:
             case SKY:
-                platmap = new PlatMapVanilla(world, random, context, platX, platZ);
+                platmap = new PlatMapVanilla(world, context, platX, platZ);
                 break;
 
             case DESERT:			// industrial zone
             case EXTREME_HILLS:		// tall city
             case FOREST:			// neighborhood
-                platmap = new PlatMapMegaScrapers(world, random, context, platX, platZ);
+                platmap = new PlatMapMegaScrapers(world, context, platX, platZ);
                 break;
 
             case FROZEN_OCEAN:		// winter ocean/lake side
             case FROZEN_RIVER:		// ???
             case ICE_DESERT:		// stark industrial zone
             case ICE_MOUNTAINS:		// stark tall city
-                platmap = new PlatMapSkyscrapers(world, random, context, platX, platZ);
+                platmap = new PlatMapSkyscrapers(world, context, platX, platZ);
                 break;
 
             case ICE_PLAINS:		// apartments
@@ -112,7 +132,7 @@ public class PlatMapManager {
             case RAINFOREST:		// ???
             case RIVER:				// ???
             case SAVANNA:			// town
-                platmap = new PlatMapTown(world, random, context, platX, platZ);
+                platmap = new PlatMapTown(world, context, platX, platZ);
                 break;
 
             case SEASONAL_FOREST:	// ???
@@ -121,14 +141,14 @@ public class PlatMapManager {
             case TAIGA:				// ???
             case TUNDRA:			// recreation
             default:
-                platmap = new PlatMapCentralPark(world, random, context, platX, platZ);
+                platmap = new PlatMapCentralPark(world, context, platX, platZ);
                 break;
         }
 
         return platmap;
     }
 
-    private PlatMapContext getContext(World world, VoxtonGen plugin, Random random, int chunkX, int chunkZ) {
+    private PlatMapContext getContext(Random random) {
         switch (random.nextInt(20)) {
             case 0:
             case 1:
@@ -161,12 +181,18 @@ public class PlatMapManager {
         }
     }
 
-    // Supporting code used by getPlatMap
-    private int calcOrigin(int i) {
-        if (i >= 0) {
-            return i / PlatMap.SIDE * PlatMap.SIDE;
+    /**
+     * Gets the origin of a PlatMap coordinate. (If a side were 16, then it
+     * would get the closest multiple of 16 to the number.)
+     *
+     * @param platCoord
+     * @return
+     */
+    public static int getPlatMapOrigin(int platCoord) {
+        if (platCoord >= 0) {
+            return platCoord / PlatMap.SIDE * PlatMap.SIDE;
         } else {
-            return -((Math.abs(i + 1) / PlatMap.SIDE * PlatMap.SIDE) + PlatMap.SIDE);
+            return -((Math.abs(platCoord + 1) / PlatMap.SIDE * PlatMap.SIDE) + PlatMap.SIDE);
         }
     }
 

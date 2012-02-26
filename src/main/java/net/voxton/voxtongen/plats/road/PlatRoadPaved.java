@@ -3,7 +3,7 @@ package net.voxton.voxtongen.plats.road;
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;
-import net.voxton.voxtongen.platmaps.PlatMap;
+import net.voxton.voxtongen.platmap.PlatMap;
 import net.voxton.voxtongen.support.Direction;
 import net.voxton.voxtongen.support.Direction.Chest;
 import net.voxton.voxtongen.support.Direction.Ladder;
