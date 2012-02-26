@@ -299,16 +299,21 @@ public class PlatRoadPaved extends PlatRoad {
     public void generateBlocks(PlatMap platmap, RealChunk chunk, PlatMapContext context, int platX, int platZ) {
         // look around
         SurroundingRoads roads = new SurroundingRoads(platmap, platX, platZ);
+        RoadOrientation ro = roads.getOrientation();
 
         // light posts
-        RoadOrientation ro = roads.getOrientation();
-        if (!ro.equals(RoadOrientation.CENTER)) {
-            if (!ro.equals(RoadOrientation.EAST) && !ro.equals(RoadOrientation.SOUTH)) {
-                generateLightPost(chunk, context, sidewalkWidth - 1, sidewalkWidth - 1);
+        if (getType().equals(PlatType.ROAD_ARTERY)) {
+            if (!ro.equals(RoadOrientation.CENTER)) {
+                if (!ro.equals(RoadOrientation.EAST) && !ro.equals(RoadOrientation.SOUTH)) {
+                    generateLightPost(chunk, context, sidewalkWidth - 1, sidewalkWidth - 1);
+                }
+                if (!ro.equals(RoadOrientation.WEST) && !ro.equals(RoadOrientation.NORTH)) {
+                    generateLightPost(chunk, context, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth);
+                }
             }
-            if (!ro.equals(RoadOrientation.WEST) && !ro.equals(RoadOrientation.NORTH)) {
-                generateLightPost(chunk, context, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth);
-            }
+        } else {
+            generateLightPost(chunk, context, sidewalkWidth - 1, sidewalkWidth - 1);
+            generateLightPost(chunk, context, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth);
         }
 
         // where do we start
@@ -319,15 +324,15 @@ public class PlatRoadPaved extends PlatRoad {
 
         // sewer?
         if (context.doSewer) {
-
-            // drill down
-            if (!ro.equals(RoadOrientation.CENTER)
-                    && roads.toEast() && roads.toNorth()) {
-                generateManhole(chunk, ByteChunk.WIDTH - sidewalkWidth,
-                        base2Y,
-                        sidewalkLevel,
-                        ByteChunk.WIDTH - sidewalkWidth - 1);
-            }
+// NO DRILLING FOR NOW
+//            // drill down
+//            if (!ro.equals(RoadOrientation.CENTER)
+//                    && roads.toEast() && roads.toNorth()) {
+//                generateManhole(chunk, ByteChunk.WIDTH - sidewalkWidth,
+//                        base2Y,
+//                        sidewalkLevel,
+//                        ByteChunk.WIDTH - sidewalkWidth - 1);
+//            }
 
             // draw/fill vaults and ceiling inset
             populateVault(chunk, context, 0, vaultWidth,
