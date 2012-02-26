@@ -56,8 +56,9 @@ public abstract class PlatHeightedBuilding extends PlatBuilding {
         }
         
         int heightDiff = maxHeight - minHeight;
+        int r = (heightDiff > 0) ? rand.nextInt(heightDiff) : heightDiff;
         
-        height = rand.nextInt(heightDiff) + minHeight;
+        height = r + minHeight;
         
         // how do the walls inset?
         insetWallEW = rand.nextInt(context.rangeOfWallInset) + 1; // 1 or 2
