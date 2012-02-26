@@ -70,11 +70,9 @@ public class MapMatrix {
     }
 
     private int getMapMatrixRelative(int mapCoord) {
-        if (mapCoord >= 0) {
-            return mapCoord / side * side;
-        } else {
-            return -((Math.abs(mapCoord + 1) / side * side) + side);
-        }
-    }
+        return (mapCoord >= 0)
+                ? mapCoord % side
+                : (mapCoord % side) + side - 1;
 
+    }
 }
