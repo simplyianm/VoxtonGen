@@ -6,8 +6,8 @@ package net.voxton.voxtongen.platmap.city;
 
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmap.MapType;
-import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.plats.building.PlatOneFloorBuilding;
+import net.voxton.voxtongen.plat.PlatLot;
+import net.voxton.voxtongen.plat.building.PlatOneFloorBuilding;
 import org.bukkit.World;
 
 /**

@@ -5,8 +5,8 @@ import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmap.MapType;
 import net.voxton.voxtongen.platmap.PlatMap;
-import net.voxton.voxtongen.plats.etc.PlatBiome;
-import net.voxton.voxtongen.plats.PlatLot;
+import net.voxton.voxtongen.plat.etc.PlatBiome;
+import net.voxton.voxtongen.plat.PlatLot;
 
 import org.bukkit.World;
 

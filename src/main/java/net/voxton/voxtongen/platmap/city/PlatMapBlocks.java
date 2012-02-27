@@ -1,13 +1,13 @@
 package net.voxton.voxtongen.platmap.city;
 
-import net.voxton.voxtongen.plats.park.PlatStatue;
+import net.voxton.voxtongen.plat.PlatLot;
+import net.voxton.voxtongen.plat.park.PlatStatue;
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmap.generic.PlatMapRoadBorder;
-import net.voxton.voxtongen.plats.*;
-import net.voxton.voxtongen.plats.road.PlatRoadPaved;
-import net.voxton.voxtongen.plats.road.PlatRoad;
+import net.voxton.voxtongen.plat.road.PlatRoadPaved;
+import net.voxton.voxtongen.plat.road.PlatRoad;
 
 import org.bukkit.World;
 

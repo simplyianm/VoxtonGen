@@ -17,7 +17,7 @@ import net.voxton.voxtongen.platmap.city.PlatMapCentralPark;
 import net.voxton.voxtongen.platmap.city.PlatMapMegaScrapers;
 import net.voxton.voxtongen.platmap.city.PlatMapSkyscrapers;
 import net.voxton.voxtongen.platmap.city.PlatMapTown;
-import net.voxton.voxtongen.plats.PlatLot;
+import net.voxton.voxtongen.plat.PlatLot;
 import net.voxton.voxtongen.chunk.ByteChunk;
 import org.bukkit.Bukkit;
 

@@ -7,7 +7,7 @@ package net.voxton.voxtongen.platmap.generic;
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmap.PlatMap;
-import net.voxton.voxtongen.plats.road.PlatRoadArtery;
+import net.voxton.voxtongen.plat.road.PlatRoadArtery;
 import org.bukkit.World;
 
 /**

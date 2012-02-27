@@ -1,7 +1,7 @@
 package net.voxton.voxtongen.surrounding;
 
 import net.voxton.voxtongen.platmap.PlatMap;
-import net.voxton.voxtongen.plats.PlatLot;
+import net.voxton.voxtongen.plat.PlatLot;
 
 public class SurroundingParks {
     public boolean[][] neighbors;

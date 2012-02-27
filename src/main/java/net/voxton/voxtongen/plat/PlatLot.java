@@ -1,4 +1,4 @@
-package net.voxton.voxtongen.plats;
+package net.voxton.voxtongen.plat;
 
 import java.util.Random;
 

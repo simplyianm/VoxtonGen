@@ -1,4 +1,4 @@
-package net.voxton.voxtongen.plats.road;
+package net.voxton.voxtongen.plat.road;
 
 import java.util.Random;
 
@@ -10,7 +10,7 @@ import net.voxton.voxtongen.support.Direction.Ladder;
 import net.voxton.voxtongen.support.Direction.TrapDoor;
 import net.voxton.voxtongen.chunk.RealChunk;
 import net.voxton.voxtongen.chunk.ByteChunk;
-import net.voxton.voxtongen.plats.PlatType;
+import net.voxton.voxtongen.plat.PlatType;
 import net.voxton.voxtongen.surrounding.SurroundingRoads;
 import org.bukkit.Material;
 import org.bukkit.entity.CreatureType;
@@ -260,22 +260,6 @@ public class PlatRoadPaved extends PlatRoad {
             chunk.setBlocks(0, ByteChunk.WIDTH, sidewalkLevel, sidewalkLevel + 1, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH, sidewalkId);
         }
 
-        // sidewalk corners
-        if (roads.getOrientation().equals(RoadOrientation.CENTER)) {
-            if (!roads.toNorthWest()) {
-                chunk.setBlocks(0, sidewalkWidth, sidewalkLevel, sidewalkLevel + 1, 0, sidewalkWidth, sidewalkId);
-            }
-            if (!roads.toNorthEast()) {
-                chunk.setBlocks(ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH, sidewalkLevel, sidewalkLevel + 1, 0, sidewalkWidth, sidewalkId);
-            }
-            if (!roads.toSouthWest()) {
-                chunk.setBlocks(0, sidewalkWidth, sidewalkLevel, sidewalkLevel + 1, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH, sidewalkId);
-            }
-            if (!roads.toSouthEast()) {
-                chunk.setBlocks(ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH, sidewalkLevel, sidewalkLevel + 1, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH, sidewalkId);
-            }
-        }
-
         // round things out
         if (!roads.toWest() && roads.toEast() && !roads.toNorth() && roads.toSouth()) {
             generateRoundedOut(chunk, context, sidewalkWidth, sidewalkWidth,
@@ -295,19 +279,124 @@ public class PlatRoadPaved extends PlatRoad {
         }
     }
 
+    protected void generateCrosswalks(SurroundingRoads roads, RealChunk chunk, int sidewalkLevel) {
+        //Sidewalk corners and crosswalks
+        RoadOrientation ro = roads.getOrientation();
+        if (ro.isConjunction()) {
+            int mat = Material.STEP.getId();
+            byte data = 4;
+
+            int wool = Material.WOOL.getId();
+            byte primaryId = 0;
+            byte secondaryId = 8;
+
+            boolean nr = false;
+            boolean sr = false;
+            boolean wr = false;
+            boolean er = false;
+
+            if (!roads.toNorthWest()) {
+                chunk.setBlocks(0, sidewalkWidth, sidewalkLevel, sidewalkLevel + 1, 0, sidewalkWidth, mat, data);
+
+                nr = true;
+                wr = true;
+            }
+
+            if (!roads.toNorthEast()) {
+                chunk.setBlocks(ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH, sidewalkLevel, sidewalkLevel + 1, 0, sidewalkWidth, mat, data);
+
+                nr = true;
+                er = true;
+            }
+
+            if (!roads.toSouthWest()) {
+                chunk.setBlocks(0, sidewalkWidth, sidewalkLevel, sidewalkLevel + 1, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH, mat, data);
+
+                sr = true;
+                wr = true;
+            }
+
+            if (!roads.toSouthEast()) {
+                chunk.setBlocks(ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH, sidewalkLevel, sidewalkLevel + 1, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH, mat, data);
+
+                sr = true;
+                er = true;
+            }
+
+            if (!ro.isAvenueStreet()) {
+                if (nr) {
+                    //North road
+                    chunk.setBlocks(0, ByteChunk.WIDTH,
+                            sidewalkLevel - 1, sidewalkLevel,
+                            sidewalkWidth - 1, sidewalkWidth,
+                            wool, primaryId);
+                    chunk.setBlocks(0, ByteChunk.WIDTH,
+                            sidewalkLevel - 1, sidewalkLevel,
+                            0, 1,
+                            wool, secondaryId);
+                }
+
+                if (sr) {
+                    //South road
+                    chunk.setBlocks(0, ByteChunk.WIDTH,
+                            sidewalkLevel - 1, sidewalkLevel,
+                            ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth + 1,
+                            wool, primaryId);
+                    chunk.setBlocks(0, ByteChunk.WIDTH,
+                            sidewalkLevel - 1, sidewalkLevel,
+                            ByteChunk.WIDTH - 1, ByteChunk.WIDTH,
+                            wool, secondaryId);
+                }
+
+                if (wr) {
+                    //West road
+                    chunk.setBlocks(sidewalkWidth - 1, sidewalkWidth,
+                            sidewalkLevel - 1, sidewalkLevel,
+                            0, ByteChunk.WIDTH,
+                            wool, primaryId);
+                    chunk.setBlocks(0, 1,
+                            sidewalkLevel - 1, sidewalkLevel,
+                            0, ByteChunk.WIDTH,
+                            wool, secondaryId);
+                }
+
+                if (er) {
+                    //East road
+                    chunk.setBlocks(ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth + 1,
+                            sidewalkLevel - 1, sidewalkLevel,
+                            0, ByteChunk.WIDTH,
+                            wool, primaryId);
+                    chunk.setBlocks(ByteChunk.WIDTH - 1, ByteChunk.WIDTH,
+                            sidewalkLevel - 1, sidewalkLevel,
+                            0, ByteChunk.WIDTH,
+                            wool, secondaryId);
+                }
+            }
+        }
+    }
+
     @Override
     public void generateBlocks(PlatMap platmap, RealChunk chunk, PlatMapContext context, int platX, int platZ) {
+        // where do we start
+        int base1Y = context.streetLevel - PlatMapContext.floorHeight * 3 + 1;
+        int sewerY = base1Y + 1;
+        int base2Y = base1Y + PlatMapContext.floorHeight + 1;
+        int sidewalkLevel = context.streetLevel + 1;
+
         // look around
         SurroundingRoads roads = new SurroundingRoads(platmap, platX, platZ);
         RoadOrientation ro = roads.getOrientation();
 
+        generateCrosswalks(roads, chunk, sidewalkLevel);
+
         // light posts
         if (getType().equals(PlatType.ROAD_ARTERY)) {
-            if (!ro.equals(RoadOrientation.CENTER)) {
-                if (!ro.equals(RoadOrientation.EAST) && !ro.equals(RoadOrientation.SOUTH)) {
+            if (!ro.equals(RoadOrientation.CENTER)
+                    && !ro.isConjunction()) {
+                if (!ro.equals(RoadOrientation.EAST_AVE) && !ro.equals(RoadOrientation.SOUTH_AVE)) {
                     generateLightPost(chunk, context, sidewalkWidth - 1, sidewalkWidth - 1);
                 }
-                if (!ro.equals(RoadOrientation.WEST) && !ro.equals(RoadOrientation.NORTH)) {
+                if (!ro.equals(RoadOrientation.WEST_AVE) && !ro.equals(RoadOrientation.NORTH_AVE)) {
                     generateLightPost(chunk, context, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth);
                 }
             }
@@ -316,11 +405,6 @@ public class PlatRoadPaved extends PlatRoad {
             generateLightPost(chunk, context, ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth);
         }
 
-        // where do we start
-        int base1Y = context.streetLevel - PlatMapContext.floorHeight * 3 + 1;
-        int sewerY = base1Y + 1;
-        int base2Y = base1Y + PlatMapContext.floorHeight + 1;
-        int sidewalkLevel = context.streetLevel + 1;
 
         // sewer?
         if (context.doSewer) {

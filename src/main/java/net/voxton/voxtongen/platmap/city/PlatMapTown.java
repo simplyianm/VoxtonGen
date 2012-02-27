@@ -7,9 +7,9 @@ package net.voxton.voxtongen.platmap.city;
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmap.MapType;
-import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.plats.building.PlatLowCommercial;
-import net.voxton.voxtongen.plats.building.PlatMedCommercial;
+import net.voxton.voxtongen.plat.PlatLot;
+import net.voxton.voxtongen.plat.building.PlatLowCommercial;
+import net.voxton.voxtongen.plat.building.PlatMedCommercial;
 import org.bukkit.World;
 
 /**

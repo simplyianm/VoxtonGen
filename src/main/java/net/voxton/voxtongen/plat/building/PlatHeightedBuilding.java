@@ -1,10 +1,10 @@
-package net.voxton.voxtongen.plats.building;
+package net.voxton.voxtongen.plat.building;
 
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmap.PlatMap;
-import net.voxton.voxtongen.plats.PlatLot;
+import net.voxton.voxtongen.plat.PlatLot;
 import net.voxton.voxtongen.chunk.ByteChunk;
 import net.voxton.voxtongen.support.Direction.StairWell;
 import net.voxton.voxtongen.chunk.RealChunk;

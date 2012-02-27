@@ -1,6 +1,6 @@
-package net.voxton.voxtongen.plats.park;
+package net.voxton.voxtongen.plat.park;
 
-import net.voxton.voxtongen.plats.building.PlatBuilding;
+import net.voxton.voxtongen.plat.building.PlatBuilding;
 import java.util.Random;
 
 import net.voxton.voxtongen.context.PlatMapContext;
@@ -9,8 +9,8 @@ import net.voxton.voxtongen.chunk.ByteChunk;
 import net.voxton.voxtongen.support.Direction.Ladder;
 import net.voxton.voxtongen.support.Direction.TrapDoor;
 import net.voxton.voxtongen.chunk.RealChunk;
-import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.plats.PlatType;
+import net.voxton.voxtongen.plat.PlatLot;
+import net.voxton.voxtongen.plat.PlatType;
 
 import org.bukkit.Material;
 import org.bukkit.TreeType;

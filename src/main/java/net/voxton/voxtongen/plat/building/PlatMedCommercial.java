@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.voxton.voxtongen.plats.building;
+package net.voxton.voxtongen.plat.building;
 
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
-import net.voxton.voxtongen.plats.PlatType;
+import net.voxton.voxtongen.plat.PlatType;
 
 /**
  *

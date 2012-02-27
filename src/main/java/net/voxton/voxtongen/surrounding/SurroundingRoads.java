@@ -2,8 +2,8 @@ package net.voxton.voxtongen.surrounding;
 
 import java.util.Arrays;
 import net.voxton.voxtongen.platmap.PlatMap;
-import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.plats.road.RoadOrientation;
+import net.voxton.voxtongen.plat.PlatLot;
+import net.voxton.voxtongen.plat.road.RoadOrientation;
 
 public class SurroundingRoads {
     private boolean[][] roads;
@@ -42,16 +42,16 @@ public class SurroundingRoads {
 
     /**
      * Returns true if the road section is straight.
-     * 
-     * @return 
+     *
+     * @return
      */
     public boolean isStraight() {
         boolean ns = (toWest() && toEast());
         boolean we = (toNorth() && toSouth());
-        
+
         return (ns && !we) || (!ns && we);
     }
-    
+
     /**
      * Returns true if there are roads adjacent to this one.
      *
@@ -150,17 +150,61 @@ public class SurroundingRoads {
     public RoadOrientation getOrientation() {
         if (toWest() && toEast()) {
             if (toNorth() && !toSouth()) {
-                return RoadOrientation.SOUTH;
+                return RoadOrientation.SOUTH_AVE;
             } else if (!toNorth() && toSouth()) {
-                return RoadOrientation.NORTH;
+                return RoadOrientation.NORTH_AVE;
+            } else if (!toNorth() && !toSouth()) {
+                return RoadOrientation.WE;
             }
         }
 
         if (toNorth() && toSouth()) {
             if (toWest() && !toEast()) {
-                return RoadOrientation.EAST;
+                return RoadOrientation.EAST_AVE;
             } else if (!toWest() && toEast()) {
-                return RoadOrientation.WEST;
+                return RoadOrientation.WEST_AVE;
+            } else if (!toWest() && !toEast()) {
+                return RoadOrientation.NORTH_AVE;
+            }
+        }
+
+        if (toNorthWest() && toNorthEast()) {
+            if (!toSouthWest() && !toSouthEast()) {
+                return RoadOrientation.SOUTH_CONJ;
+            } else if (!toSouthWest() && toSouthEast()) {
+                return RoadOrientation.SW_AVE;
+            } else if (toSouthWest() && !toSouthEast()) {
+                return RoadOrientation.SE_AVE;
+            }
+        }
+
+        if (toSouthWest() && toSouthEast()) {
+            if (!toNorthWest() && !toNorthEast()) {
+                return RoadOrientation.NORTH_CONJ;
+            } else if (!toNorthWest() && toNorthEast()) {
+                return RoadOrientation.NW_AVE;
+            } else if (toNorthWest() && !toNorthEast()) {
+                return RoadOrientation.NE_AVE;
+            }
+        }
+
+        if (toNorthWest() && toSouthWest()) {
+            if (!toNorthEast() && !toSouthEast()) {
+                return RoadOrientation.EAST_CONJ;
+            } else if (!toNorthEast() && toSouthEast()) {
+                return RoadOrientation.NE_AVE;
+            } else if (toNorthEast() && !toSouthEast()) {
+                return RoadOrientation.SE_AVE;
+            }
+        }
+
+        if (toNorthEast() && toSouthEast()) {
+            if (!toNorthWest() && !toSouthWest()) {
+                return RoadOrientation.WEST_CONJ;
+            } else if (!toNorthWest() && toSouthWest()) {
+                return RoadOrientation.NW_AVE;
+            } else if (toNorthWest() && !toSouthWest()) {
+                return RoadOrientation.SW_AVE;
             }
         }
 

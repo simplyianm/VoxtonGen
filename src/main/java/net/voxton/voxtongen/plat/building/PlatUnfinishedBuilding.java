@@ -1,18 +1,18 @@
-package net.voxton.voxtongen.plats.building;
+package net.voxton.voxtongen.plat.building;
 
-import net.voxton.voxtongen.plats.building.PlatBuilding;
+import net.voxton.voxtongen.plat.building.PlatBuilding;
 import java.util.Random;
 
 import org.bukkit.Material;
 
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmap.PlatMap;
-import net.voxton.voxtongen.plats.PlatLot;
+import net.voxton.voxtongen.plat.PlatLot;
 import net.voxton.voxtongen.chunk.ByteChunk;
 import net.voxton.voxtongen.support.Direction.Stair;
 import net.voxton.voxtongen.support.Direction.Torch;
 import net.voxton.voxtongen.chunk.RealChunk;
-import net.voxton.voxtongen.plats.PlatType;
+import net.voxton.voxtongen.plat.PlatType;
 import net.voxton.voxtongen.surrounding.SurroundingFloors;
 import net.voxton.voxtongen.support.Direction.StairWell;
 

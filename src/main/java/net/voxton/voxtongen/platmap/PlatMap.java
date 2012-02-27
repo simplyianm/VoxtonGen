@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import net.voxton.voxtongen.context.PlatMapContext;
-import net.voxton.voxtongen.plats.PlatLot;
+import net.voxton.voxtongen.plat.PlatLot;
 import net.voxton.voxtongen.chunk.ByteChunk;
 import net.voxton.voxtongen.chunk.RealChunk;
 

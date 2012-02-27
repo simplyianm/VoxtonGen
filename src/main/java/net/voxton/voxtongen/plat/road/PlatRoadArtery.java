@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.voxton.voxtongen.plats.road;
+package net.voxton.voxtongen.plat.road;
 
 import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.chunk.ByteChunk;
-import net.voxton.voxtongen.plats.PlatType;
+import net.voxton.voxtongen.plat.PlatType;
 import net.voxton.voxtongen.surrounding.SurroundingRoads;
 import org.bukkit.Material;
 
@@ -32,19 +32,19 @@ public class PlatRoadArtery extends PlatRoadPaved {
         int slp = sl + 1;
 
         switch (orientation) {
-            case NORTH:
+            case NORTH_AVE:
                 chunk.setBlocks(0, ByteChunk.WIDTH, sl, slp, 14, 15, medianId);
                 break;
 
-            case SOUTH:
+            case SOUTH_AVE:
                 chunk.setBlocks(0, ByteChunk.WIDTH, sl, slp, 1, 2, medianId);
                 break;
 
-            case WEST:
+            case WEST_AVE:
                 chunk.setBlocks(14, 15, sl, slp, 0, ByteChunk.WIDTH, medianId);
                 break;
 
-            case EAST:
+            case EAST_AVE:
                 chunk.setBlocks(1, 2, sl, slp, 0, ByteChunk.WIDTH, medianId);
                 break;
         }

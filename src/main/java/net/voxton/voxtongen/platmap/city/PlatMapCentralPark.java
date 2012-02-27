@@ -8,8 +8,8 @@ import java.util.Random;
 import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmap.MapType;
 import net.voxton.voxtongen.platmap.generic.PlatMapRoadBorder;
-import net.voxton.voxtongen.plats.PlatLot;
-import net.voxton.voxtongen.plats.park.PlatPark;
+import net.voxton.voxtongen.plat.PlatLot;
+import net.voxton.voxtongen.plat.park.PlatPark;
 import org.bukkit.World;
 
 /**
