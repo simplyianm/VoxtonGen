@@ -67,6 +67,8 @@ public class PlatRoadPaved extends PlatRoad {
 
     protected final static byte sidewalkId = (byte) Material.STEP.getId();
 
+    protected static byte medianId = (byte) Material.GLOWSTONE.getId();
+
     public PlatRoadPaved(Random rand, PlatMapContext context) {
         super(rand, context);
 
@@ -99,11 +101,29 @@ public class PlatRoadPaved extends PlatRoad {
         doPlumbing(context, chunk, base2Y, base3Y, plumbingY);
         doPavement(context, roads, chunk);
         doSidewalk(roads, context, chunk, sidewalkLevel);
-
     }
 
     protected void doPavement(PlatMapContext context, SurroundingRoads roads, ByteChunk chunk) {
         chunk.setLayer(context.streetLevel, pavementId);
+
+        int pStart = ByteChunk.WIDTH >> 1;
+        int pEnd = pStart + 1;
+
+        RoadOrientation ro = roads.getOrientation();
+
+        if (ro.equals(RoadOrientation.NS)) {
+            for (int i = 0; i < 3; i++) {
+                int line = i * 5; //4 for the line, 1 for spacing
+                int lineEnd = line + 4;
+                chunk.setBlocks(pStart, pEnd, context.streetLevel, context.streetLevel + 1, line, lineEnd, pavementId);
+            }
+        } else if (ro.equals(RoadOrientation.WE)) {
+            for (int i = 0; i < 3; i++) {
+                int line = i * 5; //4 for the line, 1 for spacing
+                int lineEnd = line + 4;
+                chunk.setBlocks(line, lineEnd, context.streetLevel, context.streetLevel + 1, pStart, pEnd, pavementId);
+            }
+        }
     }
 
     protected void doSewer(PlatMapContext context, ByteChunk chunk, int sewerY, SurroundingRoads roads, int base1Y, int base2Y) {

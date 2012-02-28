@@ -1,32 +1,18 @@
 package net.voxton.voxtongen.gen;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import net.voxton.voxtongen.VoxtonGen;
 
-import net.voxton.voxtongen.context.ContextAllPark;
-import net.voxton.voxtongen.context.ContextCityCenter;
-import net.voxton.voxtongen.context.ContextHighrise;
-import net.voxton.voxtongen.context.ContextLowrise;
-import net.voxton.voxtongen.context.ContextMall;
-import net.voxton.voxtongen.context.ContextMidrise;
-import net.voxton.voxtongen.context.ContextUnfinished;
-import net.voxton.voxtongen.context.PlatMapContext;
 import net.voxton.voxtongen.platmap.PlatMap;
-import net.voxton.voxtongen.platmap.etc.PlatMapVanilla;
-import net.voxton.voxtongen.platmap.city.PlatMapCentralPark;
-import net.voxton.voxtongen.platmap.city.PlatMapMegaScrapers;
-import net.voxton.voxtongen.platmap.city.PlatMapSkyscrapers;
-import net.voxton.voxtongen.platmap.city.PlatMapTown;
 import net.voxton.voxtongen.plat.PlatLot;
 import net.voxton.voxtongen.chunk.ByteChunk;
-import org.bukkit.Bukkit;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
-import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 public class VChunkGenerator extends ChunkGenerator {
     private VoxtonGen plugin;

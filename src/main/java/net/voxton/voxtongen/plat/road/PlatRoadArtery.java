@@ -16,7 +16,6 @@ import org.bukkit.Material;
  * @author simplyianm
  */
 public class PlatRoadArtery extends PlatRoadPaved {
-    private byte medianId = (byte) Material.GLOWSTONE.getId();
 
     public PlatRoadArtery(Random rand, PlatMapContext context) {
         super(rand, context);
@@ -24,7 +23,7 @@ public class PlatRoadArtery extends PlatRoadPaved {
 
     @Override
     protected void doPavement(PlatMapContext context, SurroundingRoads roads, ByteChunk chunk) {
-        super.doPavement(context, roads, chunk);
+        chunk.setLayer(context.streetLevel, pavementId);
 
         RoadOrientation orientation = roads.getOrientation();
 
