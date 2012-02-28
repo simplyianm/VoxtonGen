@@ -115,13 +115,13 @@ public class PlatRoadPaved extends PlatRoad {
             for (int i = 0; i < 3; i++) {
                 int line = i * 5; //4 for the line, 1 for spacing
                 int lineEnd = line + 4;
-                chunk.setBlocks(pStart, pEnd, context.streetLevel, context.streetLevel + 1, line, lineEnd, pavementId);
+                chunk.setBlocks(pStart, pEnd, context.streetLevel, context.streetLevel + 1, line, lineEnd, medianId);
             }
         } else if (ro.equals(RoadOrientation.WE)) {
             for (int i = 0; i < 3; i++) {
                 int line = i * 5; //4 for the line, 1 for spacing
                 int lineEnd = line + 4;
-                chunk.setBlocks(line, lineEnd, context.streetLevel, context.streetLevel + 1, pStart, pEnd, pavementId);
+                chunk.setBlocks(line, lineEnd, context.streetLevel, context.streetLevel + 1, pStart, pEnd, medianId);
             }
         }
     }
@@ -343,54 +343,59 @@ public class PlatRoadPaved extends PlatRoad {
                 er = true;
             }
 
-            if (!ro.isAvenueStreet()) {
-                if (nr) {
-                    //North road
-                    chunk.setBlocks(0, ByteChunk.WIDTH,
-                            sidewalkLevel - 1, sidewalkLevel,
-                            sidewalkWidth - 1, sidewalkWidth,
-                            wool, primaryId);
-                    chunk.setBlocks(0, ByteChunk.WIDTH,
-                            sidewalkLevel - 1, sidewalkLevel,
-                            0, 1,
-                            wool, secondaryId);
-                }
+            if (ro.isAvenueStreet()) {
+                nr = ro.equals(RoadOrientation.NORTH_CONJ);
+                sr = ro.equals(RoadOrientation.SOUTH_CONJ);
+                wr = ro.equals(RoadOrientation.WEST_CONJ);
+                er = ro.equals(RoadOrientation.EAST_CONJ);
+            }
 
-                if (sr) {
-                    //South road
-                    chunk.setBlocks(0, ByteChunk.WIDTH,
-                            sidewalkLevel - 1, sidewalkLevel,
-                            ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth + 1,
-                            wool, primaryId);
-                    chunk.setBlocks(0, ByteChunk.WIDTH,
-                            sidewalkLevel - 1, sidewalkLevel,
-                            ByteChunk.WIDTH - 1, ByteChunk.WIDTH,
-                            wool, secondaryId);
-                }
+            if (nr) {
+                //North road
+                chunk.setBlocks(0, ByteChunk.WIDTH,
+                        sidewalkLevel - 1, sidewalkLevel,
+                        sidewalkWidth - 1, sidewalkWidth,
+                        wool, primaryId);
+                chunk.setBlocks(0, ByteChunk.WIDTH,
+                        sidewalkLevel - 1, sidewalkLevel,
+                        0, 1,
+                        wool, secondaryId);
+            }
 
-                if (wr) {
-                    //West road
-                    chunk.setBlocks(sidewalkWidth - 1, sidewalkWidth,
-                            sidewalkLevel - 1, sidewalkLevel,
-                            0, ByteChunk.WIDTH,
-                            wool, primaryId);
-                    chunk.setBlocks(0, 1,
-                            sidewalkLevel - 1, sidewalkLevel,
-                            0, ByteChunk.WIDTH,
-                            wool, secondaryId);
-                }
+            if (sr) {
+                //South road
+                chunk.setBlocks(0, ByteChunk.WIDTH,
+                        sidewalkLevel - 1, sidewalkLevel,
+                        ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth + 1,
+                        wool, primaryId);
+                chunk.setBlocks(0, ByteChunk.WIDTH,
+                        sidewalkLevel - 1, sidewalkLevel,
+                        ByteChunk.WIDTH - 1, ByteChunk.WIDTH,
+                        wool, secondaryId);
+            }
 
-                if (er) {
-                    //East road
-                    chunk.setBlocks(ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth + 1,
-                            sidewalkLevel - 1, sidewalkLevel,
-                            0, ByteChunk.WIDTH,
-                            wool, primaryId);
-                    chunk.setBlocks(ByteChunk.WIDTH - 1, ByteChunk.WIDTH,
-                            sidewalkLevel - 1, sidewalkLevel,
-                            0, ByteChunk.WIDTH,
-                            wool, secondaryId);
-                }
+            if (wr) {
+                //West road
+                chunk.setBlocks(sidewalkWidth - 1, sidewalkWidth,
+                        sidewalkLevel - 1, sidewalkLevel,
+                        0, ByteChunk.WIDTH,
+                        wool, primaryId);
+                chunk.setBlocks(0, 1,
+                        sidewalkLevel - 1, sidewalkLevel,
+                        0, ByteChunk.WIDTH,
+                        wool, secondaryId);
+            }
+
+            if (er) {
+                //East road
+                chunk.setBlocks(ByteChunk.WIDTH - sidewalkWidth, ByteChunk.WIDTH - sidewalkWidth + 1,
+                        sidewalkLevel - 1, sidewalkLevel,
+                        0, ByteChunk.WIDTH,
+                        wool, primaryId);
+                chunk.setBlocks(ByteChunk.WIDTH - 1, ByteChunk.WIDTH,
+                        sidewalkLevel - 1, sidewalkLevel,
+                        0, ByteChunk.WIDTH,
+                        wool, secondaryId);
             }
         }
     }

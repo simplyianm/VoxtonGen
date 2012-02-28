@@ -164,7 +164,7 @@ public class SurroundingRoads {
             } else if (!toWest() && toEast()) {
                 return RoadOrientation.WEST_AVE;
             } else if (!toWest() && !toEast()) {
-                return RoadOrientation.NORTH_AVE;
+                return RoadOrientation.NS;
             }
         }
 
