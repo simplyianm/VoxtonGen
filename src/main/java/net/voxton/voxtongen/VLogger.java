@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class VLogger {
     private static final Logger LOGGER = Logger.getLogger("Minecraft.VoxtonGen");
 
-    public static final int VERBOSITY = 5;
+    public static final int VERBOSITY = 0;
 
     public static void log(String message) {
         log(Level.INFO, message);

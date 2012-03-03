@@ -107,7 +107,7 @@ public class PlatRoadPaved extends PlatRoad {
         chunk.setLayer(context.streetLevel, pavementId);
 
         int pStart = ByteChunk.WIDTH >> 1;
-        int pEnd = pStart + 1;
+        int pEnd = pStart + 2;
 
         RoadOrientation ro = roads.getOrientation();
 
